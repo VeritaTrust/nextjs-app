@@ -1,4 +1,5 @@
 import {useRouter} from "next/router";
+import Link from "next/link";
 
 
 function Navbar() {
@@ -26,7 +27,9 @@ function Navbar() {
           </form>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-auto bg-black">
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle active align-self-center" aria-current="page" href="/">Explore</a>
+              <Link href="/">
+                <a className="nav-link dropdown-toggle active align-self-center" aria-current="page" >Explore</a>
+              </Link>
               <ul className="submenu dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a className="dropdown-item" href="#"><i className="flaticon flaticon-user"></i> Domaine name</a>
                 </li>
