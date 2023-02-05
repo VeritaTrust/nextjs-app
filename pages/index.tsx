@@ -1,5 +1,9 @@
 import Head from 'next/head'
 import Link from "next/link";
+import {GetServerSideProps} from "next";
+import axios from "axios";
+import sequelize from "@server/database/models/conn";
+import User from "@server/database/models/User";
 
 export default function Home() {
   return (
@@ -29,9 +33,9 @@ export default function Home() {
                 <p className="lead">VeritaTrust is a decentralized & transparent customer feedback on the
                   Blockchain.</p>
                 <p className="lead text-green">Share your genuine experience and get rewards.</p>
-                <a className="btn btn-success btn-lg me-4 text-white px-5" href="/categories">Explore</a>
-                <a className="btn btn-outline-primary btn-lg px-5"
-                   href="https://dev.veritatrust.com/create_account">Create</a>
+                <Link className="btn btn-success btn-lg me-4 text-white px-5" href="/categories">Explore</Link>
+                <Link className="btn btn-outline-primary btn-lg px-5"
+                   href="https://dev.veritatrust.com/create_account">Create</Link>
               </div>
               <div className="col-lg-6 py-5">
                 <img src="/img/reviews-homepage.jpg" alt="reviews"/>
@@ -46,57 +50,57 @@ export default function Home() {
                 <h4 className="display-6 text-white">Découvrez les différentes catégories</h4>
               </div>
               <div className="col-lg-4 text-end">
-                <a href="/categories" className="btn btn-primary mt-3">Toutes les catégories</a>
+                <Link href="/categories" className="btn btn-primary mt-3">Toutes les catégories</Link>
               </div>
             </div>
             <ul className="row text-white category">
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-healthy-food me-3"></i> Alimentation</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-healthy-food me-3"></i> Alimentation</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-beauty-saloon me-3"></i> Animaux</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-beauty-saloon me-3"></i> Animaux</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-responsive me-3"></i> Appareils électroniques</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-responsive me-3"></i> Appareils électroniques</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-creativity me-3"></i> Arts et loisirs</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-creativity me-3"></i> Arts et loisirs</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-suitcase me-3"></i> Bagages et maroquinerie</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-suitcase me-3"></i> Bagages et maroquinerie</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-baby-products me-3"></i> Bébés et tout-petits</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-baby-products me-3"></i> Bébés et tout-petits</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-prototype me-3"></i> Entreprise et industrie</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-prototype me-3"></i> Entreprise et industrie</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-office-supplies me-3"></i> Fournitures de bureau</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-office-supplies me-3"></i> Fournitures de bureau</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-toys me-3"></i> Jeux et jouets</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-toys me-3"></i> Jeux et jouets</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-furnitures me-3"></i> Meubles</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-furnitures me-3"></i> Meubles</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-cosmetics me-3"></i> Santé et beauté</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-cosmetics me-3"></i> Santé et beauté</Link>
               </li>
               <li className="col-md-6 col-lg-3 mb-4 ">
-                <a className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-hood me-3"></i> Vêtements et accessoires</a>
+                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
+                  className="flaticon flaticon-hood me-3"></i> Vêtements et accessoires</Link>
               </li>
 
             </ul>
@@ -417,7 +421,7 @@ export default function Home() {
                   <div className="col-lg-6 mx-auto">
                     <p className="lead text-center">Vous recherchez un avis en particulier ?<br/>Recherchez les avis sur
                       le produit que vous souhaitez.</p>
-                    <a className="btn btn-primary w-100" href="#">Voir tous les avis</a>
+                    <Link className="btn btn-primary w-100" href="#">Voir tous les avis</Link>
                   </div>
                 </div>
               </div>
@@ -452,4 +456,27 @@ export default function Home() {
       </main>
     </>
   )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    console.log('!!!!AHASHDHSA')
+
+
+
+    const {data} = await axios.get(
+      `http://localhost:3000/api`,
+    );
+    console.log('NAME', data);
+
+    const userRepo = sequelize.getRepository(User)
+    const a = await userRepo.findAll<User>()
+    console.log('!AAA from getServerSideProps!', a)
+
+    return {props: {name: "BURAK"}};
+  } catch (error) {
+    console.log(error)
+    return {props: {name: "BURAK"}};
+  }
 }

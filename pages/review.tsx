@@ -3,6 +3,7 @@ import Head from "next/head";
 import {useTranslation} from "next-i18next";
 import {useRouter} from "next/router";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import Link from "next/link";
 
 interface Props {
   merchantReviews: MerchantReview[];
@@ -60,8 +61,8 @@ const Review: NextPage<Props> = ({merchantReviews, webmerchant}) => {
             <div className="row mt-3">
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
-                  <li className="breadcrumb-item"><a href="./"><i className="flaticon-home"></i>Home</a></li>
-                  <li className="breadcrumb-item"><a href="#">Category</a></li>
+                  <li className="breadcrumb-item"><Link href="./"><i className="flaticon-home"></i>Home</Link></li>
+                  <li className="breadcrumb-item"><Link href="#">Category</Link></li>
                   <li className="breadcrumb-item active" aria-current="page">Home page</li>
                 </ol>
               </nav>
@@ -95,12 +96,12 @@ const Review: NextPage<Props> = ({merchantReviews, webmerchant}) => {
               </div>
               <div className="col-lg-4">
                 <div className="link-brand">
-                  <a href={`https://${webmerchant}`} className="link">
+                  <Link href={`https://${webmerchant}`} className="link">
                     <p className="lead p-3 pe-5 rounded-4"><i className="flaticon-global-network me-1"></i>
                       {webmerchant}
                       <span>Visit the website</span><i
                         className="flaticon-fleche-angulaire-pointant-vers-la-droite"></i></p>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -115,7 +116,7 @@ const Review: NextPage<Props> = ({merchantReviews, webmerchant}) => {
                   data-aos="fade-up" data-aos-anchor-placement="center-bottom">
                   <div className="profil d-flex">
                     <img className="me-3 d-none d-lg-block" src="/img/star-0.png" width="50" height="50"/>
-                    <p><a href="#">Write a review</a></p>
+                    <p><Link href="#">Write a review</Link></p>
                   </div>
                   <div className="form__star">
                     <img src="/img/star-3.svg" alt="reviews"/>
@@ -240,7 +241,7 @@ const Review: NextPage<Props> = ({merchantReviews, webmerchant}) => {
                                 data-bs-html="true" data-bs-trigger="focus" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-custom-class="veritatrust-popover"
                                 data-bs-title="<i class='flaticon-cube-3d me-1'></i> Verified via Blockchain"
-                                data-bs-content="Blockchain lorem ipsum <a href='' target='_blank'>Tooltip</a> <u>with</u> <b>HTML</b>">
+                                data-bs-content="Blockchain lorem ipsum <Link href='' target='_blank'>Tooltip</Link> <u>with</u> <b>HTML</b>">
                           <span className="text-white"><i className="flaticon-cube-3d me-1"></i> Verified via Blockchain</span>
                         </button>
                       </div>
@@ -254,9 +255,9 @@ const Review: NextPage<Props> = ({merchantReviews, webmerchant}) => {
                     </div>
                     <div className="share d-flex justify-content-around">
                       <div className="recommanded">
-                        <a href="#"><i className="flaticon-heart"></i> Useful</a></div>
-                      <div className="share"><a href="#"><i className="flaticon-network"></i> Share</a></div>
-                      <div className="flag"><a href="#" aria-label="flag"><i className="flaticon-red-flag"></i></a>
+                        <Link href="#"><i className="flaticon-heart"></i> Useful</Link></div>
+                      <div className="share"><Link href="#"><i className="flaticon-network"></i> Share</Link></div>
+                      <div className="flag"><Link href="#" aria-label="flag"><i className="flaticon-red-flag"></i></Link>
                       </div>
                     </div>
                   </div>
@@ -270,8 +271,8 @@ const Review: NextPage<Props> = ({merchantReviews, webmerchant}) => {
                     <li className="page-item active" aria-current="page">
                       <span className="page-link">1</span>
                     </li>
-                    <li className="page-item"><a className="page-link" href="?site=<%=webmerchant%>&page=2">2</a></li>
-                    <li className="page-item"><a className="page-link" href="?site=<%=webmerchant%>&page=3">3</a></li>
+                    <li className="page-item"><Link className="page-link" href="?site=<%=webmerchant%>&page=2">2</Link></li>
+                    <li className="page-item"><Link className="page-link" href="?site=<%=webmerchant%>&page=3">3</Link></li>
                   </ul>
                 </nav>
               </div>
@@ -280,7 +281,7 @@ const Review: NextPage<Props> = ({merchantReviews, webmerchant}) => {
                      data-aos-anchor-placement="center-bottom">
                   <div className="header d-flex">
                     <h4>Company&apos;s overview</h4>
-                    <p><a href="#">Tout afficher</a></p>
+                    <p><Link href="#">Tout afficher</Link></p>
                   </div>
                   <div className="content">
                     <ul className="ps-0">
@@ -323,7 +324,7 @@ const Review: NextPage<Props> = ({merchantReviews, webmerchant}) => {
                       <h4>Category</h4>
                       <ul className="ps-0">
                         <li className="d-flex">
-                          <div className="text"><a href="#">Équipement moto</a></div>
+                          <div className="text"><Link href="#">Équipement moto</Link></div>
                         </li>
                       </ul>
                     </div>
@@ -459,13 +460,13 @@ export default Review;
                           </div>
                         </div>
                         <!--   <div class="verified ms-3">
-                               <p class="certified small bg-success text-white d-inline py-1 px-2 rounded-3 "><a class="text-white" href="https://rinkeby.etherscan.io/tx/"><i class="flaticon-cube-3d me-1"></i> Verified via Blockchain</a></p>
+                               <p class="certified small bg-success text-white d-inline py-1 px-2 rounded-3 "><Link class="text-white" href="https://rinkeby.etherscan.io/tx/"><i class="flaticon-cube-3d me-1"></i> Verified via Blockchain</Link></p>
                            </div>
                            <div class="verified me-lg-3 mb-2">
-                               <p class="certified small bg-success text-white d-inline py-1 px-2 rounded-3 " data-bs-html="true" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Blockchain lorem ipsum <em>Tooltip</em> <u>with</u> <b>HTML</b>"><a class="text-white" href="https://rinkeby.etherscan.io/tx/<%=merchantReviews[i].hash_transaction%>"><i class="flaticon-cube-3d me-1"></i> Verified via Blockchain</a></p>
+                               <p class="certified small bg-success text-white d-inline py-1 px-2 rounded-3 " data-bs-html="true" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Blockchain lorem ipsum <em>Tooltip</em> <u>with</u> <b>HTML</b>"><Link class="text-white" href="https://rinkeby.etherscan.io/tx/<%=merchantReviews[i].hash_transaction%>"><i class="flaticon-cube-3d me-1"></i> Verified via Blockchain</Link></p>
                            </div>  -->
                         <div class="verified me-lg-3 mb-2">
-                          <button type="button" class="certified small bg-success text-white d-inline px-0 px-1 rounded-3" data-bs-html="true" data-bs-trigger="focus" data-bs-toggle="popover" data-bs-placement="top" data-bs-custom-class="veritatrust-popover" data-bs-title="<i class='flaticon-cube-3d me-1'></i> Verified via Blockchain" data-bs-content="We use the blockchain to track and verify the transaction. <br><a href='https://goerli.etherscan.io/tx/<%=merchantReviews[i].hash_transaction%>' target='_blank'>View the onchain transaction</a> | <a href='#' target='_blank'>What is Blockchain?</a>"><span class="text-white"><i class="flaticon-cube-3d me-1"></i> Verified via Blockchain</span></button>
+                          <button type="button" class="certified small bg-success text-white d-inline px-0 px-1 rounded-3" data-bs-html="true" data-bs-trigger="focus" data-bs-toggle="popover" data-bs-placement="top" data-bs-custom-class="veritatrust-popover" data-bs-title="<i class='flaticon-cube-3d me-1'></i> Verified via Blockchain" data-bs-content="We use the blockchain to track and verify the transaction. <br><Link href='https://goerli.etherscan.io/tx/<%=merchantReviews[i].hash_transaction%>' target='_blank'>View the onchain transaction</Link> | <Link href='#' target='_blank'>What is Blockchain?</Link>"><span class="text-white"><i class="flaticon-cube-3d me-1"></i> Verified via Blockchain</span></button>
                         </div>
                         <div class="date text-primary ms-auto"> <%=Intl.DateTimeFormat('en', {month: 'short'}).format(new Date((1+merchantReviews[i].experienceDate.getMonth()).toString()))%> <%=merchantReviews[i].experienceDate.getDate()%>, <%=merchantReviews[i].experienceDate.getFullYear()%></div>
                       </div>
@@ -490,7 +491,7 @@ export default Review;
                           <div class="related_content">
                             <p class="text-primary mb-0"><%=merchantReviews[i].contentpr%></p>
                             <p class="mb-0">(<%=merchantReviews[i].first_name%>) has rated this product-<%=merchantReviews[i].product_id%> <%=merchantReviews[i].ratingp%>/5</p>
-                            <a class="btn btn-secondary btn-sm mt-2" href="#">All reviews for this product</a>
+                            <Link class="btn btn-secondary btn-sm mt-2" href="#">All reviews for this product</Link>
                           </div>
 
                         </div>
@@ -498,9 +499,9 @@ export default Review;
 
                       <div class="share d-flex justify-content-around">
                         <div class="recommanded">
-                          <a href="#"><i class="flaticon-heart"></i> Useful</a></div>
-                        <div class="share"><a href="#"><i class="flaticon-network"></i> Share</a></div>
-                        <div class="flag"><a href="#" aria-label="flag"><i class="flaticon-red-flag"></i></a></div>
+                          <Link href="#"><i class="flaticon-heart"></i> Useful</Link></div>
+                        <div class="share"><Link href="#"><i class="flaticon-network"></i> Share</Link></div>
+                        <div class="flag"><Link href="#" aria-label="flag"><i class="flaticon-red-flag"></i></Link></div>
                       </div>
                     </div>
                       <%  i++;}) %>

@@ -3,6 +3,7 @@ import Head from "next/head";
 import {useTranslation} from "next-i18next";
 import {useRouter} from "next/router";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import Link from "next/link";
 
 const ValidReview: NextPage = () => {
   const {t: translateCommon} = useTranslation('common')
@@ -56,9 +57,9 @@ const ValidReview: NextPage = () => {
                       <p className="">You just got rewarded with <strong>1 token &#129297;</strong> for your review.
                         Get more reward and review more.</p>
                       <p className="lead text-green">Get more reward and review more.</p>
-                      <a className="btn btn-primary"
+                      <Link className="btn btn-primary"
                          href="http://dev.veritatrust.com/review?site=<%=company_name%>"> Review your Products
-                        recently buy</a>
+                        recently buy</Link>
                     </div>
                   </div>
                 </div>

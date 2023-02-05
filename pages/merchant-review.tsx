@@ -2,6 +2,8 @@ import {GetServerSideProps, NextPage} from "next";
 import axios from "axios";
 import Head from "next/head";
 import {useTranslation} from "next-i18next";
+import Link from "next/link";
+//import UserRepository from "@server/database/repository/UserRepository";
 
 interface Props {
   merchantReviews: MerchantReview[]
@@ -41,13 +43,13 @@ const MerchantReview: NextPage<Props> = ({merchantReviews}) => {
                 <div className="col-11 col-lg-8 py-3 mx-auto">
                   <ul className="nav nav-pills nav-fill">
                     <li className="nav-item">
-                      <a className="nav-link active" aria-current="page" href="./merchant_review_form"><span
+                      <Link className="nav-link active" aria-current="page" href="./merchant_review_form"><span
                         className="badge text-bg-success text-white rounded-circle">1</span> Votre avis sur
-                        l&apos;entreprise</a>
+                        l&apos;entreprise</Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="./product_review_form"><span
-                        className="badge text-bg-success text-white rounded-circle">2</span> Votre avis sur les produits</a>
+                      <Link className="nav-link" href="/product_review_form"><span
+                        className="badge text-bg-success text-white rounded-circle">2</span> Votre avis sur les produits</Link>
                     </li>
                   </ul>
                 </div>
@@ -123,6 +125,9 @@ const MerchantReview: NextPage<Props> = ({merchantReviews}) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log('ENVENEN', process.env.ENV)
   try {
+    //const a = await UserRepository.findAllRaw();
+   // console.log('!!A', a)
+
     const {data} = await axios.get(
       `http://localhost:3000/api/hello`,
     );
@@ -130,10 +135,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const merchantReviews = [] as MerchantReview[];
     return {props: {merchantReviews}};
   } catch (error) {
+    console.log(error)
     return {
       redirect: {
         permanent: false,
-        destination: process.env.NEXT_PUBLIC_HOMEPAGE_URL,
+        destination: '/',
       },
       props: {},
     };

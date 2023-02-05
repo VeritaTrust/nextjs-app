@@ -13,9 +13,9 @@ function Navbar() {
   return (
     <nav className="navbar sticky-top navbar-white bg-white navbar-dark navbar-expand-lg shadow-sm">
       <div className="container" id="container-menu">
-        <a className="navbar-brand" href="./">
+        <Link className="navbar-brand" href="/">
           <img src="/img/logo-veritatrust-c.png" alt="Veritatrust" width="170"/>
-        </a>
+        </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -27,37 +27,37 @@ function Navbar() {
           </form>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-auto bg-black">
             <li className="nav-item dropdown">
-              <Link href="/">
-                <a className="nav-link dropdown-toggle active align-self-center" aria-current="page" >Explore</a>
+              <Link className="nav-link dropdown-toggle active align-self-center" aria-current="page" href="/">
+                Explore
               </Link>
               <ul className="submenu dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a className="dropdown-item" href="#"><i className="flaticon flaticon-user"></i> Domaine name</a>
+                <li><Link className="dropdown-item" href="#"><i className="flaticon flaticon-user"></i> Domaine name</Link>
                 </li>
-                <li><a className="dropdown-item" href="#"><i className="flaticon flaticon-user"></i> Another action</a>
+                <li><Link className="dropdown-item" href="#"><i className="flaticon flaticon-user"></i> Another action</Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider"/>
                 </li>
-                <li><a className="dropdown-item" href="#"><i className="flaticon flaticon-user"></i> Something else
-                  here</a></li>
+                <li><Link className="dropdown-item" href="#"><i className="flaticon flaticon-user"></i> Something else
+                  here</Link></li>
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link  align-self-center" href="#" id="navbarDropdown" role="button"
+              <Link className="nav-link  align-self-center" href="#" id="navbarDropdown" role="button"
                  data-bs-toggle="dropdown" aria-expanded="false">
                 Resources
-              </a>
+              </Link>
 
             </li>
             <li className="nav-item">
-              <a className="nav-link align-self-center" href="#">Blog</a>
+              <Link className="nav-link align-self-center" href="#">Blog</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link align-self-center" href="https://dev.veritatrust.com/create_account">Create</a>
+              <Link className="nav-link align-self-center" href="https://dev.veritatrust.com/create_account">Create</Link>
             </li>
-            <li className="nav-item"><a className="nav-link align-self-center" type="button" data-bs-toggle="offcanvas"
+            <li className="nav-item"><Link className="nav-link align-self-center" href={'#'} type="button" data-bs-toggle="offcanvas"
                                         data-bs-target="#account" aria-controls="account"><i
-              className="flaticon flaticon-user"></i></a></li>
+              className="flaticon flaticon-user"></i></Link></li>
             <li>
               <button onClick={() => onToggleLang('tr')}>CHG LANG TO TR</button>
             </li>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function Footer() {
   return (
     <footer className="bg-primary py-2 text-white navbar">
@@ -73,9 +75,9 @@ function Footer() {
         <div className="d-flex justify-content-between">
           <p>© 2022 - All right reserved.</p>
           <ul className="list-inline">
-            <li className="list-inline-item"><a href="#">Privacy policy</a></li>
-            <li className="list-inline-item"><a href="#">Legal information</a></li>
-            <li className="list-inline-item"><a href="#">T&Cs</a></li>
+            <li className="list-inline-item"><Link href="#">Privacy policy</Link></li>
+            <li className="list-inline-item"><Link href="#">Legal information</Link></li>
+            <li className="list-inline-item"><Link href="#">T&Cs</Link></li>
           </ul>
         </div>
       </div>
