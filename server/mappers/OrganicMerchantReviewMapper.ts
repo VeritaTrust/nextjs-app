@@ -1,5 +1,5 @@
 import OrganicMerchantReview from "@server/database/models/OrganicMerchantReview";
-import { OrganicMerchantReviewDto } from "@server/dto";
+import {OrganicMerchantReviewDto} from "@server/dto";
 
 export default class OrganicMerchantReviewMapper {
   public static toDto(domainObj: OrganicMerchantReview): OrganicMerchantReviewDto {
@@ -11,6 +11,10 @@ export default class OrganicMerchantReviewMapper {
       createdAt: domainObj.createdAt,
       updatedAt: domainObj.updatedAt,
       experienceDate: domainObj.experienceDate,
+      first_name: 'burak',
+      last_name: 'karaoglan',
+      location: 'location',
+      Nbre: 'Nbre???',
       newAddedField: 'BURAK',
       email: 'CHECKMAIL'
     }

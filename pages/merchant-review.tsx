@@ -3,25 +3,17 @@ import axios from "axios";
 import Head from "next/head";
 import {useTranslation} from "next-i18next";
 import Link from "next/link";
+import {MerchantReviewDto} from "@server/dto/MerchantReviewDto";
+
 //import UserRepository from "@server/database/repository/UserRepository";
 
 interface Props {
-  merchantReviews: MerchantReview[]
-}
-
-type MerchantReview = {
-  id: string;
-  userId: string;
-  status: string;
-  title: string;
-  content: string;
-  rating: string;
-  experienceDate: string;
+  merchantReviews: MerchantReviewDto[]
 }
 
 const MerchantReview: NextPage<Props> = ({merchantReviews}) => {
 
-  const { t: translate } = useTranslation('about')
+  const {t: translate} = useTranslation('about')
   console.log(translate('about_us_text'))
 
   return (
@@ -32,7 +24,8 @@ const MerchantReview: NextPage<Props> = ({merchantReviews}) => {
       </Head>
       <main>
         <div className="row d-flex align-items-center">
-          <form className="row d-flex align-items-center" id="review_form" method="POST" action="/api/merchant-review-form">
+          <form className="row d-flex align-items-center" id="review_form" method="POST"
+                action="/api/merchant-review-form">
             <div className="container">
 
               <div className="row d-flex align-items-center">
@@ -106,13 +99,9 @@ const MerchantReview: NextPage<Props> = ({merchantReviews}) => {
                               id="btn">Publier
                       </button>
                     </div>
-
                   </div>
                 </div>
-
-
               </div>
-
             </div>
           </form>
 
@@ -126,13 +115,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log('ENVENEN', process.env.ENV)
   try {
     //const a = await UserRepository.findAllRaw();
-   // console.log('!!A', a)
+    // console.log('!!A', a)
 
     const {data} = await axios.get(
       `http://localhost:3000/api/hello`,
     );
     console.log('NAME', data);
-    const merchantReviews = [] as MerchantReview[];
+    const merchantReviews = [] as MerchantReviewDto[];
     return {props: {merchantReviews}};
   } catch (error) {
     console.log(error)

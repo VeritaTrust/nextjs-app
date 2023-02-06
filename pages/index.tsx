@@ -4,6 +4,18 @@ import {GetServerSideProps} from "next";
 import axios from "axios";
 import sequelize from "@server/database/models/conn";
 import User from "@server/database/models/User";
+import Categories from "../components/Categories";
+import ScrollReview from "../components/ScrollReview";
+import {ReviewDto} from "@server/dto/ReviewDto";
+import styles from "./Owl.module.css"
+
+const dreview: ReviewDto = {
+  fName: "Aissata",
+  lName: "Kane",
+  entity: "F.A Squad",
+  rating: 4,
+  content: "ipsum dolor sit amet consectetur adipisicing elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa accusamus quae voluptates commodi libero, dolore distinctio est repellat a voluptatem."
+}
 
 export default function Home() {
   return (
@@ -15,14 +27,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <main>
-        HOMEPAGE
-        <Link href={'merchant-review'}>
-          MERCHANT REVIEW
-        </Link>
-        <Link href={'product-review'}>
-          PRODUCT REVIEW
-        </Link>
-
+        <div className={"row d-flex gap-2"}>
+          <Link href={'merchant-review'}>
+            MERCHANT REVIEW
+          </Link>
+          <Link href={'product-review'}>
+            PRODUCT REVIEW
+          </Link>
+        </div>
 
         <section className="py-5 home__hero">
           <div className="container">
@@ -30,429 +42,80 @@ export default function Home() {
               <div className="col-lg-6 py-5">
                 <h1 className="display-2"><span className="text-primary">Trusted Reviews</span> on
                   the <span>Blockchain</span></h1>
-                <p className="lead">VeritaTrust is a decentralized & transparent customer feedback on the
+                <p className="lead">VeritaTrust is a decentralized &amp; transparent customer feedback on the
                   Blockchain.</p>
                 <p className="lead text-green">Share your genuine experience and get rewards.</p>
-                <Link className="btn btn-success btn-lg me-4 text-white px-5" href="/categories">Explore</Link>
-                <Link className="btn btn-outline-primary btn-lg px-5"
-                   href="https://dev.veritatrust.com/create_account">Create</Link>
+                <Link className="btn btn-success btn-lg me-4 text-white px-5" href="/Explore">Explore</Link>
+                <Link className="btn btn-outline-primary btn-lg px-5" href="/Create">Create</Link>
               </div>
               <div className="col-lg-6 py-5">
-                <img src="/img/reviews-homepage.jpg" alt="reviews"/>
+                <img src={'/img/reviews-homepage.jpg'} alt="reviews"/>
               </div>
             </div>
           </div>
         </section>
-        <section className="bg-success home__categorie">
-          <div className="container py-5">
-            <div className="row mb-4">
-              <div className="col-lg-8">
-                <h4 className="display-6 text-white">Découvrez les différentes catégories</h4>
+        <Categories/>
+        <div className="col-lg-6 mx-auto">
+          <p className="lead text-center">Looking for a specific review ?<br/>Look for reviews about the product you
+            want.</p>
+          <a className="btn btn-primary w-100" href="#">See all reviews</a>
+        </div>
+        <section className="home__logos bg-success py-3">
+          <div className="container">
+            <div className="row">
+              <div className="col-6 col-lg-2 text-center mb-3">
+                <img className="" src={'/img/lorem-portrait.jpg'} alt="" height="60" width="60"/>
               </div>
-              <div className="col-lg-4 text-end">
-                <Link href="/categories" className="btn btn-primary mt-3">Toutes les catégories</Link>
+              <div className="col-6 col-lg-2 text-center mb-3">
+                <img className="" src={'/img/lorem-portrait.jpg'} alt="" height="60" width="60"/>
+              </div>
+              <div className="col-6 col-lg-2 text-center mb-3">
+                <img className="" src={'/img/lorem-portrait.jpg'} alt="" height="60" width="60"/>
+              </div>
+              <div className="col-6 col-lg-2 text-center mb-3">
+                <img className="" src={'/img/lorem-portrait.jpg'} alt="" height="60" width="60"/>
+              </div>
+              <div className="col-6 col-lg-2 text-center mb-3">
+                <img className="" src={'/img/lorem-portrait.jpg'} alt="" height="60" width="60"/>
+              </div>
+              <div className="col-6 col-lg-2 text-center mb-3">
+                <img className="" src={'/img/lorem-portrait.jpg'} alt="" height="60" width="60"/>
               </div>
             </div>
-            <ul className="row text-white category">
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-healthy-food me-3"></i> Alimentation</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-beauty-saloon me-3"></i> Animaux</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-responsive me-3"></i> Appareils électroniques</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-creativity me-3"></i> Arts et loisirs</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-suitcase me-3"></i> Bagages et maroquinerie</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-baby-products me-3"></i> Bébés et tout-petits</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-prototype me-3"></i> Entreprise et industrie</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-office-supplies me-3"></i> Fournitures de bureau</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-toys me-3"></i> Jeux et jouets</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-furnitures me-3"></i> Meubles</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-cosmetics me-3"></i> Santé et beauté</Link>
-              </li>
-              <li className="col-md-6 col-lg-3 mb-4 ">
-                <Link className="p-3 bg-white text-primary rounded-5" href="#"><i
-                  className="flaticon flaticon-hood me-3"></i> Vêtements et accessoires</Link>
-              </li>
-
-            </ul>
           </div>
         </section>
         <section className="home__reviews py-5">
           <div className="container">
             <div className="row mb-4">
-              <h4 className="display-6 text-success">Vos avis</h4>
+              <h4 className="display-6 text-success">Recent Reviews</h4>
             </div>
           </div>
           <div className="">
             <div className="mb-4">
-              <div className="owl-carousel">
+              <div className={styles.owlCarousel}>
                 <div className="item">
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3 active"></div>
-                          <div className="star star__4 active"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3"></div>
-                          <div className="star star__4"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
+                  <ScrollReview review={dreview}/>
+                  <ScrollReview review={dreview}/>
                 </div>
                 <div className="item">
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3 active"></div>
-                          <div className="star star__4 active"></div>
-                          <div className="star star__5 active"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2"></div>
-                          <div className="star star__3"></div>
-                          <div className="star star__4"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
+                  <ScrollReview review={dreview}/>
+                  <ScrollReview review={dreview}/>
                 </div>
                 <div className="item">
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3"></div>
-                          <div className="star star__4"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3 active"></div>
-                          <div className="star star__4"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
+                  <ScrollReview review={dreview}/>
+                  <ScrollReview review={dreview}/>
                 </div>
                 <div className="item">
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3 active"></div>
-                          <div className="star star__4"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3"></div>
-                          <div className="star star__4"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
+                  <ScrollReview review={dreview}/>
+                  <ScrollReview review={dreview}/>
                 </div>
-                <div className="item">
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3 active"></div>
-                          <div className="star star__4"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3 active"></div>
-                          <div className="star star__4 active"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3 active"></div>
-                          <div className="star star__4"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
-                  <div className="review border border-success rounded-3 p-3 mb-3">
-                    <div className="review__header d-flex align-items-center mb-3">
-                      <img className="rounded-circle me-2" src="/img/lorem-portrait.jpg" alt="" height="60"
-                           width="60"/>
-                      <div className="stars ms-auto align-middle w-100">
-                        <div className="form__star reviews d-flex justify-content-start">
-                          <div className="star star__1 active"></div>
-                          <div className="star star__2 active"></div>
-                          <div className="star star__3 active"></div>
-                          <div className="star star__4 active"></div>
-                          <div className="star star__5"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="review__body">
-                      <p><span className="review__author">Lorem Ipsum</span> à noté <br/><span
-                        className="review__societe">Ipsum Lorem</span></p>
-                      <p><span className="lead text-success">&ldquo;</span> ipsum dolor sit amet consectetur adipisicing
-                        elit. Quam recusandae dignissimos possimus aliquam, officiis neque tenetur quibusdam nisi culpa
-                        accusamus quae voluptates commodi
-                        libero, dolore distinctio est repellat a voluptatem.<span
-                          className="lead text-success">&rdquo;</span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="container">
-                <div className="row">
-                  <div className="col-lg-6 mx-auto">
-                    <p className="lead text-center">Vous recherchez un avis en particulier ?<br/>Recherchez les avis sur
-                      le produit que vous souhaitez.</p>
-                    <Link className="btn btn-primary w-100" href="#">Voir tous les avis</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="home__logos bg-success py-3">
-          <div className="container">
-            <div className="row">
-              <div className="col-6 col-lg-2 text-center mb-3">
-                <img className="" src="/img/lorem-portrait.jpg" alt="" height="60" width="60"/>
-              </div>
-              <div className="col-6 col-lg-2 text-center mb-3">
-                <img className="" src="/img/lorem-portrait.jpg" alt="" height="60" width="60"/>
-              </div>
-              <div className="col-6 col-lg-2 text-center mb-3">
-                <img className="" src="/img/lorem-portrait.jpg" alt="" height="60" width="60"/>
-              </div>
-              <div className="col-6 col-lg-2 text-center mb-3">
-                <img className="" src="/img/lorem-portrait.jpg" alt="" height="60" width="60"/>
-              </div>
-              <div className="col-6 col-lg-2 text-center mb-3">
-                <img className="" src="/img/lorem-portrait.jpg" alt="" height="60" width="60"/>
-              </div>
-              <div className="col-6 col-lg-2 text-center mb-3">
-                <img className="" src="/img/lorem-portrait.jpg" alt="" height="60" width="60"/>
-              </div>
-            </div>
-          </div>
-        </section>
 
+              </div>
+
+
+            </div>
+          </div>
+        </section>
       </main>
     </>
   )
@@ -462,7 +125,6 @@ export default function Home() {
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     console.log('!!!!AHASHDHSA')
-
 
 
     const {data} = await axios.get(

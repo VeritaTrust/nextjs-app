@@ -8,4 +8,9 @@ export interface OrganicMerchantReviewDto {
   createdAt: Date;
   updatedAt: Date;
   experienceDate: Date;
+  first_name: string;
+  title: string;
+  last_name: string;
+  Nbre: string;
+  location: string;
 }

@@ -1,12 +1,15 @@
-import './globals.css'
-import 'bootstrap/dist/css/bootstrap.css'
+import '../public/styles/globals.css'
+import '../public/styles/bootstrap.css'
+import '../public/styles/style.css'
+import '../public/styles/flaticon_veritatrust.css'
+import '../public/styles/index.css'
+//import 'bootstrap/dist/styles/bootstrap.styles' //TODO: brk check? above enough?
 import type {AppProps} from 'next/app'
 import Navbar from "../components/header";
 import Footer from "../components/footer";
 import Head from "next/head";
 import {appWithTranslation} from "next-i18next";
 import {GetServerSideProps} from "next";
-import UserRepository from "@server/database/repository/UserRepository";
 import axios from "axios";
 
 function App({Component, pageProps}: AppProps) {
@@ -18,14 +21,7 @@ function App({Component, pageProps}: AppProps) {
       </Head>
 
       <Navbar/>
-      <div className={"vh-100 burak"}>
-        <style jsx>{
-          ` .burak {
-            height: 110rem !important;
-          }
-          `}</style>
-        <Component {...pageProps} />
-      </div>
+      <Component {...pageProps} />
       <Footer/>
     </>
   )

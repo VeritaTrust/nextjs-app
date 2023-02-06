@@ -11,18 +11,17 @@ type Data = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<OrganicMerchantReviewDto>
+  res: NextApiResponse<OrganicMerchantReviewDto[] | Data>
 ) {
   try {
 
     const repo = sequelize.getRepository(OrganicMerchantReview)
-    const a = await repo.findOne();
+    const a = await repo.findAll();
 
     //return res.status(200).send(a?.dataValues)
 
 //    return res.status(200).json(a?.dataValues)
-    const rev = a?.dataValues
-    const mapped = OrganicMerchantReviewMapper.toDto(rev)
+    const mapped = a.map(rev => OrganicMerchantReviewMapper.toDto(rev))
 
     return res.status(200).json(mapped)
 

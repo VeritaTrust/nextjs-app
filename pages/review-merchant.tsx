@@ -1,13 +1,18 @@
 import {GetServerSideProps, NextPage} from "next";
 import axios from "axios";
 import Head from "next/head";
-import { OrganicMerchantReviewDto } from "@server/dto"
+import {OrganicMerchantReviewDto} from "@server/dto"
+import MerchantDiv from "../components/MerchantDiv";
+import AboutMerchant from "../components/AboutMerchant";
+import WriteReviewDiv from "../components/WriteReviewDiv";
+import Filtering from "../components/Filtering";
+import ServiceReview from "../components/ServiceReview";
+
 interface Props {
-  merchantReview: OrganicMerchantReviewDto
+  merchantReviews: OrganicMerchantReviewDto[]
 }
 
-const ReviewMerchant: NextPage<Props> = ({merchantReview}) => {
-  console.log('REV IN HTML', merchantReview)
+const ReviewMerchant: NextPage<Props> = ({merchantReviews}) => {
   return (
     <>
       <Head>
@@ -15,11 +20,48 @@ const ReviewMerchant: NextPage<Props> = ({merchantReview}) => {
         <title>Veritatrust - Review Merchant page</title>
       </Head>
       <main>
-        SELAM
-        {merchantReview.content}
+        <>
+          <MerchantDiv rm="3.8"/>
+
+          <section className="bg-success profil-main">
+            <div className="container py-2 py-lg-5">
+              <div className="row">
+                <div className="col-lg-8">
+
+                  <WriteReviewDiv />
+                  {/*<Filtering onFilterChange={(ratings) => setRatings(ratings)}/>*/}
+                  <Filtering />
+                  <div className="reviews-list">
+                    <div>
+                      {merchantReviews && merchantReviews.map((review, index) => (
+                        <ServiceReview key={index} merchantReview={review}/>
+                      ))}
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div className="col-lg-4 text-end">
+                  <AboutMerchant title="About www.fatasoft-consulting.com" description="We offer all the shoes and accessories you want, a wide range of fashionable products, and the best brands of the moment. A gigantic choice: Guess, Tommy Hilfiger, Ecco, Geox, Pepe Jeans,
+                                 Clarks, Gino Rossi and many more... Shoes, bags, wallets and belts – all available to you 24/7. We are always here for you!"
+                                 country="France" category="Services"/>
+
+                </div>
+
+              </div>
+
+            </div>
+          </section>
+        </>
+
       </main>
     </>
   )
+}
+
+type ErrorProps = {
+  notFound: boolean;
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
@@ -35,13 +77,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
       `http://localhost:3000/api/merchantReviews`,
     );
     console.log('MEREMREME', data);
-    const a = data as OrganicMerchantReviewDto
-    return {props: { merchantReview: a }};
+    const a = data as OrganicMerchantReviewDto[]
+    return {props: {merchantReviews: a}};
   } catch (error) {
     console.log(error)
+
+    // TODO: brk default?
     return {
       notFound: true
     };
+    //return {props: {merchantReview: {}}};
   }
 }
 
