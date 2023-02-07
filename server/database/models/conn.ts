@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import User from "@server/database/models/User";
 import OrganicMerchantReview from "@server/database/models/OrganicMerchantReview";
+import OrganicProductReview from "@server/database/models/OrganicProductReview";
 
 const sequelize = new Sequelize({
   repositoryMode: true,
@@ -13,6 +14,6 @@ const sequelize = new Sequelize({
   dialect: "mysql",
 });
 
-sequelize.addModels([User, OrganicMerchantReview]);
+sequelize.addModels([User, OrganicMerchantReview, OrganicProductReview]);
 
 export default sequelize;

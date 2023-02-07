@@ -14,6 +14,7 @@ export default class OrganicMerchantReviewMapper {
       first_name: 'burak',
       last_name: 'karaoglan',
       location: 'location',
+      title: 'TITLE',
       Nbre: 'Nbre???',
       newAddedField: 'BURAK',
       email: 'CHECKMAIL'

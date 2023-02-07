@@ -7,7 +7,7 @@ import User from "@server/database/models/User";
 import Categories from "../components/Categories";
 import ScrollReview from "../components/ScrollReview";
 import {ReviewDto} from "@server/dto/ReviewDto";
-import styles from "./Owl.module.css"
+import Script from "next/script";
 
 const dreview: ReviewDto = {
   fName: "Aissata",
@@ -26,6 +26,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
+      <Script src="https://code.jquery.com/jquery-3.6.1.js"
+              integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossOrigin="anonymous"></Script>
+      <Script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></Script>
+      <Script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></Script>
+      <Script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></Script>
+      <Script type="text/javascript" src="/js/owl.carousel.js"></Script>
+      <Script type="text/javascript" src="/js/custom.js" defer></Script>
       <main>
         <div className={"row d-flex gap-2"}>
           <Link href={'merchant-review'}>
@@ -92,7 +99,7 @@ export default function Home() {
           </div>
           <div className="">
             <div className="mb-4">
-              <div className={styles.owlCarousel}>
+              <div className="owl-carousel">
                 <div className="item">
                   <ScrollReview review={dreview}/>
                   <ScrollReview review={dreview}/>
@@ -111,8 +118,7 @@ export default function Home() {
                 </div>
 
               </div>
-
-
+              {/* TODO: brk replaceowl with next compatible or migrate it */}
             </div>
           </div>
         </section>

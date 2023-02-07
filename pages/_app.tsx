@@ -3,6 +3,7 @@ import '../public/styles/bootstrap.css'
 import '../public/styles/style.css'
 import '../public/styles/flaticon_veritatrust.css'
 import '../public/styles/index.css'
+import '../public/styles/owl.carousel.css'
 //import 'bootstrap/dist/styles/bootstrap.styles' //TODO: brk check? above enough?
 import type {AppProps} from 'next/app'
 import Navbar from "../components/header";
@@ -11,6 +12,7 @@ import Head from "next/head";
 import {appWithTranslation} from "next-i18next";
 import {GetServerSideProps} from "next";
 import axios from "axios";
+import Script from "next/script";
 
 function App({Component, pageProps}: AppProps) {
 
@@ -19,7 +21,6 @@ function App({Component, pageProps}: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
       </Head>
-
       <Navbar/>
       <Component {...pageProps} />
       <Footer/>
