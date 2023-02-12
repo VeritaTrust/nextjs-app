@@ -1,6 +1,6 @@
-import {Table, Column, Model, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+//import {Table, Column, Model, CreatedAt, UpdatedAt} from 'sequelize-typescript';
 
-@Table({
+/*@Table({
   tableName: "organic_product_review"
 })
 export default class OrganicProductReview extends Model {
@@ -65,3 +65,4 @@ export default class OrganicProductReview extends Model {
   })
   experienceDate!: Date;
 }
+*/

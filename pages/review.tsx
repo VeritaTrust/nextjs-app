@@ -445,7 +445,7 @@ export default Review;
                         <img src="/img/star-1.png" width="50" height="50">
                         <div class="info ms-3">
                         <p class="name lead mb-0"><%=merchantReviews[i].first_name%> <%=merchantReviews[i].last_name%></p>
-                      <p class="analyse text-muted mb-0"><%=merchantReviews[i].Nbre%> reviews • <i class="flaticon-location"></i> FR</p>
+                      <p class="analyse text-muted mb-0"><%=merchantReviews[i].Nbre%> reviews.ts • <i class="flaticon-location"></i> FR</p>
                     </div>
                     </div>
                       <div class="notation d-lg-flex justify-content-between my-3">
@@ -491,7 +491,7 @@ export default Review;
                           <div class="related_content">
                             <p class="text-primary mb-0"><%=merchantReviews[i].contentpr%></p>
                             <p class="mb-0">(<%=merchantReviews[i].first_name%>) has rated this product-<%=merchantReviews[i].product_id%> <%=merchantReviews[i].ratingp%>/5</p>
-                            <Link class="btn btn-secondary btn-sm mt-2" href="#">All reviews for this product</Link>
+                            <Link class="btn btn-secondary btn-sm mt-2" href="#">All reviews.ts for this product</Link>
                           </div>
 
                         </div>

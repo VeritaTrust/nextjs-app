@@ -2,12 +2,12 @@ import Head from 'next/head'
 import Link from "next/link";
 import {GetServerSideProps} from "next";
 import axios from "axios";
-import sequelize from "@server/database/models/conn";
 import User from "@server/database/models/User";
 import Categories from "../components/Categories";
 import ScrollReview from "../components/ScrollReview";
 import {ReviewDto} from "@server/dto/ReviewDto";
 import Script from "next/script";
+import {PrismaClient} from "@prisma/client";
 
 const dreview: ReviewDto = {
   fName: "Aissata",
@@ -35,7 +35,7 @@ export default function Home() {
       <Script type="text/javascript" src="/js/custom.js" defer></Script>
       <main>
         <div className={"row d-flex gap-2"}>
-          <Link href={'merchant-review'}>
+          <Link href={'add-merchant-review/KARSOFT'}>
             MERCHANT REVIEW
           </Link>
           <Link href={'product-review'}>
@@ -132,16 +132,22 @@ export const getServerSideProps: GetServerSideProps = async () => {
   try {
     console.log('!!!!AHASHDHSA')
 
+    const wr = await new PrismaClient().merchantProfile.findMany({
+      include: {
+        reviews: true
+      }
+    })
+    console.dir(wr, { depth: null})
 
     const {data} = await axios.get(
       `http://localhost:3000/api`,
     );
     console.log('NAME', data);
-
+/*
     const userRepo = sequelize.getRepository(User)
     const a = await userRepo.findAll<User>()
     console.log('!AAA from getServerSideProps!', a)
-
+*/
     return {props: {name: "BURAK"}};
   } catch (error) {
     console.log(error)

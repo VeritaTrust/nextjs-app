@@ -25,22 +25,16 @@ const Resources: NextPage<Props> = ({productName, organicProductReviews}) => {
             <div className="container py-2 py-lg-5">
               <div className="row">
                 <div className="col-lg-8">
-
                   <Filtering/>
-
                   <div className="reviews-list">
                     <div>
                       {organicProductReviews.map((review, index) => (
                         <ProductReview key={index} productReview={review}/>
                       ))}
                     </div>
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
           </section>
         </>

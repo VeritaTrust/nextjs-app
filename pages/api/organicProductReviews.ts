@@ -1,10 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type {NextApiRequest, NextApiResponse} from 'next'
 import OrganicMerchantReview from '@server/database/models/OrganicMerchantReview'
-import sequelize from "@server/database/models/conn";
 import OrganicMerchantReviewMapper from "@server/mappers/OrganicMerchantReviewMapper";
 import {OrganicMerchantReviewDto} from "@server/dto";
-import OrganicProductReview from "@server/database/models/OrganicProductReview";
 import OrganicProductReviewMapper from "@server/mappers/OrganicProductReviewMapper";
 import {OrganicProductReviewDto} from "@server/dto/OrganicProductReviewDto";
 
@@ -18,7 +16,7 @@ export default async function handler(
 ) {
   try {
 
-    const productName = req.query.productName;
+    /*const productName = req.query.productName;
 
     const repo = sequelize.getRepository(OrganicProductReview)
     const a = await repo.findAll({
@@ -31,8 +29,9 @@ export default async function handler(
 
     const mapped = a.map(rev => OrganicProductReviewMapper.toDto(rev))
 
-    console.log('MAOPPER', mapped)
-    return res.status(200).json(mapped)
+    console.log('MAOPPER', mapped)*/
+    //return res.status(200).json(mapped)
+    return res.status(200).json([])
 
   } catch (error) {
     console.log(error)

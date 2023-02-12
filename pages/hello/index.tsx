@@ -22,7 +22,8 @@ const Index: NextPage<HomeProps> = ({name}) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log('ENVENEN', process.env.ENV)
+  console.log('ENV?', process.env)
+  console.log('ENV?', process.env.ENV_NAME)
   try {
     const { data } = await axios.get<HomeProps>(
       `http://localhost:3000/api/hello`,

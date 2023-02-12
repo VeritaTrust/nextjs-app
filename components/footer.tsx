@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function Footer() {
   return (
     <footer className="bg-primary pt-5 pb-2 text-white">
@@ -41,7 +43,7 @@ function Footer() {
                 <h4>Corporate</h4>
                 <ul className="list-unstyled">
                   <li><a href="#">About</a></li>
-                  <li>Blog</li>
+                  <li><Link href={'blog'}>Blog</Link></li>
                   <li>jobs</li>
                   <li>Contact</li>
                   <li>Press</li>

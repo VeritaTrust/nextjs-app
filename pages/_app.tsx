@@ -12,7 +12,6 @@ import Head from "next/head";
 import {appWithTranslation} from "next-i18next";
 import {GetServerSideProps} from "next";
 import axios from "axios";
-import Script from "next/script";
 
 function App({Component, pageProps}: AppProps) {
 

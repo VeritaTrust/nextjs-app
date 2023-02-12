@@ -285,16 +285,6 @@ footer a:hover {
   border-radius: 50px;
   transition: all ease 0.9s;
 }
-#line #line-progress {
-  content: " ";
-  width: 20%;
-  height: 100%;
-  background: #02a68a;
-  position: absolute;
-  z-index: 2;
-  border-radius: 50px;
-  transition: all ease 0.9s;
-}
 
 .product #line #line-progress {
   width: 80%;

@@ -1,11 +1,9 @@
 import React from "react";
 
 export interface MerchantReviewDto {
-  id: string;
-  userId: string;
-  status: string;
+  id: number;
   title: string;
   content: string;
-  rating: string;
-  experienceDate: string;
+
+  merchantId: number;
 }

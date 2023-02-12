@@ -15,7 +15,7 @@ function SearchBar() {
   };
 
   useEffect(() => {
-    // Send a request to the server to search for reviews matching the search term
+    // Send a request to the server to search for reviews.ts matching the search term
     if (searchTerm) {
       /* TODO: brk FETCH SEARCH
       axios.get(`/search?q=${searchTerm}`)

@@ -56,7 +56,7 @@ function Navbar() {
                 <Link href="/Resources" className="nav-link  align-self-center" aria-current="page"> Resource</Link>
               </li>
               <li className="nav-item">
-                <Link href="/Blog" className="nav-link  align-self-center" aria-current="page"> Blog</Link>
+                <Link href="/blog" className="nav-link  align-self-center" aria-current="page"> Blog</Link>
 
               </li>
               <li className="nav-item">
