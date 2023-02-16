@@ -1,3 +1,7 @@
 export interface ProductDto {
-  product_name: string;
+  id: number;
+  name: string;
+  ean: string;
+  category: string;
+  imageUrl: string;
 }

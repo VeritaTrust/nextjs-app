@@ -1,1 +1,1 @@
-export * from './OrganicMerchantReviewDto'
+export * from './OrganicMerchantReviewDto';

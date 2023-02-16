@@ -1,12 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type {NextApiRequest, NextApiResponse} from 'next'
-import {PrismaClient} from "@prisma/client";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Data = {
-  message: string
-}
-
-const prisma = new PrismaClient()
+  message: string;
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,9 +14,7 @@ export default async function handler(
       db.sequelize.model('users').findAll().then(console.log)
     });*/
 
-
     //console.log('ERROROR GELIR MI?2121')
-
 
     /*
     connection.sync().then(() => {
@@ -30,8 +25,6 @@ export default async function handler(
     //const userRepo = sequelize.getRepository(User)
     //const a = await userRepo.findAll<User>()
     //console.log('!!!FROMA!!!!', a)
-
-
 
     /*a.forEach((user) => {
       //console.log('USER', user)
@@ -64,10 +57,11 @@ export default async function handler(
     console.log('USER', user)
     console.log('pOST', post)*/
     //return res.status(200).json({message: 'SUCCESS from seq' + JSON.stringify(user)})
-    return res.status(200).json({message: 'SUCCESS from seq'})
+    return res.status(200).json({ message: 'SUCCESS from seq' });
   } catch (error) {
-    console.log(error)
-    return res.status(400).json({message: "Unable to connect to the database:"})
+    console.log(error);
+    return res
+      .status(400)
+      .json({ message: 'Unable to connect to the database:' });
   }
-
 }

@@ -1,5 +1,5 @@
-import {MerchantProfile} from "@prisma/client";
-import {MerchantProfileDto} from "@server/dto/MerchantProfileDto";
+import { MerchantProfile } from '@prisma/client';
+import { MerchantProfileDto } from '@server/dto/MerchantProfileDto';
 
 export default class MerchantProfileMapper {
   public static toDto(domainObj: MerchantProfile): MerchantProfileDto {
@@ -8,7 +8,7 @@ export default class MerchantProfileMapper {
       name: domainObj.name,
       email: domainObj.email,
       logo: domainObj.logo,
-      website: domainObj.website
-    }
+      website: domainObj.website,
+    };
   }
 }

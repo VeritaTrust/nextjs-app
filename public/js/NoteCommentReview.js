@@ -9,10 +9,10 @@
 
 const noteByTextSize = {
   // Type 1
- //  40: 'Bad',
- //  60: 'Not bad',
+  //  40: 'Bad',
+  //  60: 'Not bad',
   // 80: 'Good',
- //  100: 'Very good',
+  //  100: 'Very good',
 
   // 200: 'Excellent',
   // Type 2
@@ -53,21 +53,21 @@ export class CommentReviewNote {
     if (!this.textArea) {
       console.log(this.textArea);
       errorList.push(
-        `The textarea element with id ${textAreaId} does not exist`,
+        `The textarea element with id ${textAreaId} does not exist`
       );
     }
     this.noteReview = document.getElementById(noteReviewId);
     if (!this.noteReview) {
       console.log(this.noteReview);
       errorList.push(
-        `The noteReview element with id ${noteReviewId} does not exist`,
+        `The noteReview element with id ${noteReviewId} does not exist`
       );
     }
 
     if (errorList.length > 0) {
       throw new Error(
         `The following errors have been found: ${errorList.join(', ')}`,
-        'Empty selector',
+        'Empty selector'
       );
     }
 
@@ -85,7 +85,7 @@ export class CommentReviewNote {
   stopTracking() {
     this.textArea.removeEventListener(
       'input',
-      this.setCommentNoteByCommentSize,
+      this.setCommentNoteByCommentSize
     );
   }
 

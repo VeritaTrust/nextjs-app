@@ -34,3 +34,58 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+/*import OrganicMerchantReview from '@server/database/models/OrganicMerchantReview';
+import { OrganicMerchantReviewDto } from '@server/dto';
+
+export default class OrganicMerchantReviewMapper {
+public static toDto(
+domainObj: OrganicMerchantReview
+): OrganicMerchantReviewDto {
+return {
+rating: domainObj.rating,
+content: domainObj.content,
+status: domainObj.status,
+jobId: domainObj.jobId,
+createdAt: domainObj.createdAt,
+updatedAt: domainObj.updatedAt,
+experienceDate: domainObj.experienceDate,
+first_name: 'burak',
+last_name: 'karaoglan',
+location: 'location',
+title: 'TITLE',
+Nbre: 'Nbre???',
+newAddedField: 'BURAK',
+email: 'CHECKMAIL',
+};
+}
+}
+*/
+
+
+import { OrganicProductReviewDto } from '@server/dto/OrganicProductReviewDto';
+
+export default class OrganicProductReviewMapper {
+public static toDto(
+domainObj: OrganicProductReview
+): OrganicProductReviewDto {
+return {
+rating: domainObj.rating,
+content: domainObj.content,
+status: domainObj.status,
+jobId: domainObj.jobId,
+createdAt: domainObj.createdAt,
+updatedAt: domainObj.updatedAt,
+experienceDate: domainObj.experienceDate,
+title: domainObj.title,
+productId: domainObj.productId,
+productName: domainObj.productName,
+imageVideo: domainObj.imageVideo,
+id: domainObj.id,
+userId: domainObj.userId,
+hashTransaction: domainObj.hashTransaction,
+proofOfPurchase: 'NO PROOF',
+};
+}
+}

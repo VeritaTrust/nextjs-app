@@ -15,7 +15,6 @@ function handleHoverOnReview(star) {
     const rating = star?.dataset?.index;
     fillStars(rating);
     emptyStars(rating);
-    
   });
 
   star.addEventListener('mouseout', () => {
@@ -33,18 +32,16 @@ function handleClickOnReview(star) {
     merchand.dataset.selected = rating;
 
     reviewValue.innerHTML = rating;
-   if(rating == 1)
-   reviewValueText.innerHTML = " <strong> star: </strong>Very bad";
-    if(rating == 2)
-    reviewValueText.innerHTML = " <strong> stars: </strong>Bad";
-    if(rating == 3)
-    reviewValueText.innerHTML = " <strong> stars: </strong>Average";
-    if(rating == 4)
-    reviewValueText.innerHTML = " <strong> stars: </strong>Good";
-    if(rating == 5)
-    reviewValueText.innerHTML = " <strong> stars: </strong>Excellent"; 
-    
-
+    if (rating == 1)
+      reviewValueText.innerHTML = ' <strong> star: </strong>Very bad';
+    if (rating == 2)
+      reviewValueText.innerHTML = ' <strong> stars: </strong>Bad';
+    if (rating == 3)
+      reviewValueText.innerHTML = ' <strong> stars: </strong>Average';
+    if (rating == 4)
+      reviewValueText.innerHTML = ' <strong> stars: </strong>Good';
+    if (rating == 5)
+      reviewValueText.innerHTML = ' <strong> stars: </strong>Excellent';
   });
 }
 
@@ -56,14 +53,14 @@ function fillStarsWithSelectedValue(index) {
 
 function emptyStars(rating) {
   const afterStar = starsArray.filter(
-    (s) => Number(s.dataset.index) > Number(rating),
+    (s) => Number(s.dataset.index) > Number(rating)
   );
   afterStar.forEach((s) => s.classList.remove('star-filled'));
 }
 
 function fillStars(rating) {
   const beforeStar = starsArray.filter(
-    (s) => Number(s.dataset.index) <= Number(rating),
+    (s) => Number(s.dataset.index) <= Number(rating)
   );
 
   beforeStar.forEach((s) => s.classList.add('star-filled'));

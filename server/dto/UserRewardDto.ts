@@ -1,5 +1,4 @@
 export interface UserRewardDto {
-
   levelAccount: number;
   fLevelAccount: number;
   fName: string;

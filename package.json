@@ -11,6 +11,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "prettier": "prettier --write .",
     "prisma:preview": "npx prisma migrate dev --create-only",
     "prisma:dev": "npx prisma migrate dev --name init"
   },

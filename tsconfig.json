@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
-      "@server/*": ["./server/*"],
+      "@server/*": ["./server/*"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

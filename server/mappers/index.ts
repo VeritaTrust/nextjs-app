@@ -1,4 +1,4 @@
-import MerchantProfileMapper from "@server/mappers/MerchantProfileMapper";
-import OrganicMerchantReviewMapper from "@server/mappers/OrganicMerchantReviewMapper";
+import MerchantProfileMapper from '@server/mappers/MerchantProfileMapper';
+import ProductMapper from '@server/mappers/ProductMapper';
 
-export {MerchantProfileMapper, OrganicMerchantReviewMapper};
+export {MerchantProfileMapper, ProductMapper};

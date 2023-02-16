@@ -44,3 +44,21 @@ model MerchantReview {
   merchantId Int
 }
 
+model Product {
+  id Int @id @default(autoincrement())
+  ean String @unique
+  name String @unique
+  category String
+  imageUrl String
+}
+
+model ProductReview {
+  id Int @id @default(autoincrement())
+  rating Int
+  experienceDate DateTime
+  title String
+  content String
+  merchantId Int?
+  imageUrls String
+}
+

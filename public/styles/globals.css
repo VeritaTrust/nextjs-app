@@ -1,6 +1,6 @@
 /*---maincss---*/
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 400;
 }
 
@@ -10,7 +10,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
 }
 h1 span,
@@ -71,13 +71,13 @@ li.dropdown:hover ul.dropdown-menu {
   text-align: justify;
 }
 .home__reviews .review__body .lead {
-  font-family: "Lora", serif;
+  font-family: 'Lora', serif;
   font-weight: bolder;
 }
 
 form.search::before {
-  content: "\f102";
-  font-family: "flaticon" !important;
+  content: '\f102';
+  font-family: 'flaticon' !important;
   transform: translate(35px, 2px);
   font-size: 1.5rem;
   color: #02a68a;
@@ -85,7 +85,9 @@ form.search::before {
 form.search input {
   padding-left: 50px;
 }
-form .form-control:hover, form .form-control:active, form .form-control:focus {
+form .form-control:hover,
+form .form-control:active,
+form .form-control:focus {
   box-shadow: rgba(4, 17, 29, 0.25) 0px 0px 8px 0px;
   border-color: #02a68a;
 }
@@ -119,7 +121,8 @@ footer a:hover {
 .form h3 span {
   color: #02a68a;
 }
-.form__content textarea, .form__content input {
+.form__content textarea,
+.form__content input {
   width: 100%;
   padding: 10px;
   margin: 15px 0;
@@ -134,7 +137,9 @@ footer a:hover {
   font-size: 6rem;
   color: #02a68a;
 }
-.form .form-control:hover, .form .form-control:active, .form .form-control:focus {
+.form .form-control:hover,
+.form .form-control:active,
+.form .form-control:focus {
   box-shadow: rgba(4, 17, 29, 0.25) 0px 0px 8px 0px;
   border-color: #02a68a;
 }
@@ -146,25 +151,27 @@ footer a:hover {
   padding: 10px 10px;
   margin: -1rem 1rem -1rem -0.75rem;
 }
-.form__star input.star, .form__star div.star {
+.form__star input.star,
+.form__star div.star {
   border: none;
   background-color: transparent;
   width: 50px;
   height: 50px;
-  background-image: url("/img/star-0.png");
+  background-image: url('/img/star-0.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 200ms ease-in-out;
 }
-.form__star input.star:focus-visible, .form__star div.star:focus-visible {
+.form__star input.star:focus-visible,
+.form__star div.star:focus-visible {
   outline: none;
 }
 .form__star input.star {
   cursor: pointer;
 }
 .form__star input.star:hover {
-  background-image: url("/img/star-1.png");
+  background-image: url('/img/star-1.png');
 }
 .form__star div.star {
   -webkit-user-select: none;
@@ -173,17 +180,17 @@ footer a:hover {
   user-select: none;
 }
 .form__star div.star.active {
-  background-image: url("/img/star-1.png");
+  background-image: url('/img/star-1.png');
 }
 .form__star.reviews div {
   width: 28px;
   height: 28px;
 }
 .form__star.reviews div:hover {
-  background-image: url("/img/star-0.png");
+  background-image: url('/img/star-0.png');
 }
 .form__star.reviews div.star.active:hover {
-  background-image: url("/img/star-1.png");
+  background-image: url('/img/star-1.png');
 }
 .form .visuel-mark {
   height: 200px;
@@ -208,14 +215,14 @@ footer a:hover {
   background-color: transparent;
   width: 25px;
   height: 25px;
-  background-image: url("/img/star-0.png");
+  background-image: url('/img/star-0.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 200ms ease-in-out;
 }
 .note.small .form__star div.star.star.active {
-  background-image: url("/img/star-1.png");
+  background-image: url('/img/star-1.png');
 }
 .note.small .form__star div.star:focus-visible {
   outline: none;
@@ -247,7 +254,7 @@ footer a:hover {
   color: #aaa;
 }
 .step-reviews li::after {
-  content: " ";
+  content: ' ';
   display: block;
   width: 16px;
   height: 16px;
@@ -268,7 +275,8 @@ footer a:hover {
   background-color: #02a68a;
   color: #fff;
 }
-.step-reviews li.active::after, .step-reviews li.done::after {
+.step-reviews li.active::after,
+.step-reviews li.done::after {
   border: solid 5px #02a68a;
   background-color: #eee;
 }
@@ -392,23 +400,53 @@ footer a:hover {
   justify-content: flex-start;
 }
 .profil-main .reviews-filter .filters label:nth-child(1):hover .progress-bar,
-.profil-main .reviews-filter .filters label:nth-child(1) input:checked ~ .progress .progress-bar {
+.profil-main
+  .reviews-filter
+  .filters
+  label:nth-child(1)
+  input:checked
+  ~ .progress
+  .progress-bar {
   background-color: #02a68a;
 }
 .profil-main .reviews-filter .filters label:nth-child(2):hover .progress-bar,
-.profil-main .reviews-filter .filters label:nth-child(2) input:checked ~ .progress .progress-bar {
+.profil-main
+  .reviews-filter
+  .filters
+  label:nth-child(2)
+  input:checked
+  ~ .progress
+  .progress-bar {
   background-color: green;
 }
 .profil-main .reviews-filter .filters label:nth-child(3):hover .progress-bar,
-.profil-main .reviews-filter .filters label:nth-child(3) input:checked ~ .progress .progress-bar {
+.profil-main
+  .reviews-filter
+  .filters
+  label:nth-child(3)
+  input:checked
+  ~ .progress
+  .progress-bar {
   background-color: yellow;
 }
 .profil-main .reviews-filter .filters label:nth-child(4):hover .progress-bar,
-.profil-main .reviews-filter .filters label:nth-child(4) input:checked ~ .progress .progress-bar {
+.profil-main
+  .reviews-filter
+  .filters
+  label:nth-child(4)
+  input:checked
+  ~ .progress
+  .progress-bar {
   background-color: orange;
 }
 .profil-main .reviews-filter .filters label:nth-child(5):hover .progress-bar,
-.profil-main .reviews-filter .filters label:nth-child(5) input:checked ~ .progress .progress-bar {
+.profil-main
+  .reviews-filter
+  .filters
+  label:nth-child(5)
+  input:checked
+  ~ .progress
+  .progress-bar {
   background-color: red;
 }
 .profil-main .reviews-list .profil {
@@ -486,19 +524,19 @@ footer a:hover {
 .profil-main .widget.other-shoppers .need-reviews::before,
 .profil-main .widget.other-shoppers .claimed::before,
 .profil-main .widget.other-shoppers .unclaimed::before {
-  font-family: "flaticon";
+  font-family: 'flaticon';
   font-size: 15px;
   margin-right: 5px;
 }
 .profil-main .widget.other-shoppers .need-reviews::before {
-  content: "\f10c";
+  content: '\f10c';
   color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
 }
 .profil-main .widget.other-shoppers .claimed::before {
-  content: "\f10c";
+  content: '\f10c';
 }
 .profil-main .widget.other-shoppers .unclaimed::before {
-  content: "\f10d";
+  content: '\f10d';
 }
 .profil-main .widget.experience .accordion-button {
   background-color: var(--bs-accordion-active-bg);
@@ -533,6 +571,3 @@ footer a:hover {
 }
 
 /*---main styles end ---*/
-
-
-
