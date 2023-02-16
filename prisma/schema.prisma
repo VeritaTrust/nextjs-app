@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Writer {
+  id Int @id @default(autoincrement())
+  email String @unique
+  name String?
+  posts Post[]
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String
+  published Boolean @default(false)
+  author Writer @relation(fields: [authorId], references: [id])
+  authorId Int
+}
+
+// VERITATRUST
+
+model MerchantProfile {
+  id Int @id @default(autoincrement())
+  name String @unique
+  logo String
+  website String @unique
+  email String @unique
+  reviews MerchantReview[]
+}
+
+model MerchantReview {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  merchant MerchantProfile @relation(fields: [merchantId], references: [id])
+  merchantId Int
+}
+
+model Product {
+  id Int @id @default(autoincrement())
+  ean String @unique
+  name String @unique
+  category String
+  imageUrl String
+}
+
+model ProductReview {
+  id Int @id @default(autoincrement())
+  rating Int
+  experienceDate DateTime
+  title String
+  content String
+  merchantId Int?
+  imageUrls String
+}
+

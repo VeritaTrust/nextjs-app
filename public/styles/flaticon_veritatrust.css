@@ -1,0 +1,191 @@
+@font-face {
+  font-family: 'flaticon_veritatrust';
+  src: url('flaticon_veritatrust.ttf?ee6fe14426a1eb464782f8726205295f')
+      format('truetype'),
+    url('flaticon_veritatrust.woff?ee6fe14426a1eb464782f8726205295f')
+      format('woff'),
+    url('flaticon_veritatrust.woff2?ee6fe14426a1eb464782f8726205295f')
+      format('woff2'),
+    url('flaticon_veritatrust.eot?ee6fe14426a1eb464782f8726205295f#iefix')
+      format('embedded-opentype'),
+    url('flaticon_veritatrust.svg?ee6fe14426a1eb464782f8726205295f#flaticon_veritatrust')
+      format('svg');
+}
+
+i[class^='flaticon-']:before,
+i[class*=' flaticon-']:before {
+  font-family: flaticon_veritatrust !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-user:before {
+  content: '\f101';
+}
+.flaticon-search:before {
+  content: '\f102';
+}
+.flaticon-linkedin:before {
+  content: '\f103';
+}
+.flaticon-twitter:before {
+  content: '\f104';
+}
+.flaticon-galerie:before {
+  content: '\f105';
+}
+.flaticon-global-network:before {
+  content: '\f106';
+}
+.flaticon-heart:before {
+  content: '\f107';
+}
+.flaticon-network:before {
+  content: '\f108';
+}
+.flaticon-red-flag:before {
+  content: '\f109';
+}
+.flaticon-location:before {
+  content: '\f10a';
+}
+.flaticon-fleche-angulaire-pointant-vers-la-droite:before {
+  content: '\f10b';
+}
+.flaticon-check:before {
+  content: '\f10c';
+}
+.flaticon-moins:before {
+  content: '\f10d';
+}
+.flaticon-chercher:before {
+  content: '\f10e';
+}
+.flaticon-messager:before {
+  content: '\f10f';
+}
+.flaticon-clock:before {
+  content: '\f110';
+}
+.flaticon-information:before {
+  content: '\f111';
+}
+.flaticon-home:before {
+  content: '\f112';
+}
+.flaticon-cube-3d:before {
+  content: '\f113';
+}
+.flaticon-healthy-food:before {
+  content: '\f114';
+}
+.flaticon-beauty-saloon:before {
+  content: '\f115';
+}
+.flaticon-responsive:before {
+  content: '\f116';
+}
+.flaticon-creativity:before {
+  content: '\f117';
+}
+.flaticon-suitcase:before {
+  content: '\f118';
+}
+.flaticon-baby-products:before {
+  content: '\f119';
+}
+.flaticon-prototype:before {
+  content: '\f11a';
+}
+.flaticon-office-supplies:before {
+  content: '\f11b';
+}
+.flaticon-toys:before {
+  content: '\f11c';
+}
+.flaticon-furnitures:before {
+  content: '\f11d';
+}
+.flaticon-cosmetics:before {
+  content: '\f11e';
+}
+.flaticon-hood:before {
+  content: '\f11f';
+}
+.flaticon-sport:before {
+  content: '\f120';
+}
+.flaticon-electric-scooter:before {
+  content: '\f121';
+}
+.flaticon-car:before {
+  content: '\f122';
+}
+.flaticon-door-handle:before {
+  content: '\f123';
+}
+.flaticon-master-of-ceremonies:before {
+  content: '\f124';
+}
+.flaticon-online:before {
+  content: '\f125';
+}
+.flaticon-table:before {
+  content: '\f126';
+}
+.flaticon-software:before {
+  content: '\f127';
+}
+.flaticon-family:before {
+  content: '\f128';
+}
+.flaticon-symmetry:before {
+  content: '\f129';
+}
+.flaticon-time-left:before {
+  content: '\f12a';
+}
+.flaticon-user-1:before {
+  content: '\f12b';
+}
+.flaticon-quality:before {
+  content: '\f12c';
+}
+.flaticon-coins:before {
+  content: '\f12d';
+}
+.flaticon-hide:before {
+  content: '\f12e';
+}
+.flaticon-seen:before {
+  content: '\f12f';
+}
+.flaticon-logo-level:before {
+  content: '\f130';
+}
+.flaticon-facebook:before {
+  content: '\f131';
+}
+.flaticon-apple:before {
+  content: '\f132';
+}
+.flaticon-fox:before {
+  content: '\f133';
+}
+.flaticon-google:before {
+  content: '\f134';
+}
+.flaticon-rating:before {
+  content: '\f135';
+}
+.flaticon-rating-1:before {
+  content: '\f136';
+}
+.flaticon-logo-metamask-fil:before {
+  content: '\f137';
+}

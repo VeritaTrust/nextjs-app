@@ -1,50 +1,50 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import '../styles/globals.css'
-import type {AppProps} from 'next/app'
+import '../public/styles/globals.css';
+import '../public/styles/bootstrap.css';
+import '../public/styles/style.css';
+import '../public/styles/flaticon_veritatrust.css';
+import '../public/styles/index.css';
+import '../public/styles/owl.carousel.css';
+//import 'bootstrap/dist/styles/bootstrap.styles' //TODO: brk check? above enough?
+import type { AppProps } from 'next/app';
+import Navbar from '../components/header';
+import Footer from '../components/footer';
+import Head from 'next/head';
+import { appWithTranslation } from 'next-i18next';
+import { GetServerSideProps } from 'next';
+import axios from 'axios';
 
-export default function App({Component, pageProps}: AppProps) {
-
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">Navbar</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/hello">GO TO HELLO</a>
-            </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                 aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">Action</a>
-                <a className="dropdown-item" href="#">Another action</a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" href="#">Disabled</a>
-            </li>
-          </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <Navbar />
       <Component {...pageProps} />
+      <Footer />
     </>
-  )
-
+  );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    console.log('2121 !!!! AHASHDHSA');
+
+    const { data } = await axios.get(`http://localhost:3000/api`);
+    console.log('!!!!!!NAME', data);
+
+    //const a = await UserRepository.findAllRaw();
+    //console.log('!!A', a)
+    return { props: { name: 'BURAK' } };
+  } catch (error) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+      props: {},
+    };
+  }
+};
+
+export default appWithTranslation(App);
