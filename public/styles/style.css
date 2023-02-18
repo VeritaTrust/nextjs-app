@@ -619,7 +619,7 @@ footer a:hover {
   right: 50%;
   left: 50%;
   transform: translate(-50%);
-  bottom: -25px;
+  bottom: -23px;
 }
 .step-reviews li.active p {
   color: #002d6b;
@@ -632,37 +632,6 @@ footer a:hover {
 .step-reviews li.done::after {
   border: solid 5px #02a68a;
   background-color: #eee;
-}
-
-#line {
-  width: 80%;
-  margin: auto;
-  background: #eee;
-  height: 5px;
-  position: absolute;
-  left: 10%;
-  bottom: 0px;
-  z-index: 1;
-  border-radius: 50px;
-  transition: all ease 0.9s;
-}
-#line #line-progress {
-  content: ' ';
-  width: 10%;
-  height: 100%;
-  background: #02a68a;
-  position: absolute;
-  z-index: 2;
-  border-radius: 50px;
-  transition: all ease 0.9s;
-}
-
-.product #line #line-progress {
-  width: 50%;
-}
-
-.valid #line #line-progress {
-  width: 95%;
 }
 
 .result-ok img {

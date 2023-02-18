@@ -281,23 +281,6 @@ footer a:hover {
   background-color: #eee;
 }
 
-#line {
-  width: 80%;
-  margin: auto;
-  background: #eee;
-  height: 5px;
-  position: absolute;
-  left: 10%;
-  top: 100px;
-  z-index: 1;
-  border-radius: 50px;
-  transition: all ease 0.9s;
-}
-
-.product #line #line-progress {
-  width: 80%;
-}
-
 /*  page profil */
 .profil-header .breadcrumb-item:first-child i {
   margin-right: 5px;
@@ -549,6 +532,37 @@ footer a:hover {
   background-color: var(--bs-accordion-active-bg);
 }
 
+#line {
+  width: 80%;
+  margin: auto;
+  background: #eee;
+  height: 5px;
+  position: absolute;
+  left: 10%;
+  top: 124px;
+  z-index: 1;
+  border-radius: 50px;
+  transition: all ease 0.9s;
+}
+#line #line-progress {
+  content: " ";
+  width: 10%;
+  height: 100%;
+  background: #02a68a;
+  position: absolute;
+  z-index: 2;
+  border-radius: 50px;
+  transition: all ease 0.9s;
+}
+
+.product #line #line-progress {
+  width: 50%;
+}
+
+.valid #line #line-progress {
+  width: 95%;
+}
+
 @media screen and (max-width: 767.98px) {
   .info-mark {
     grid-template-columns: 1fr;
@@ -569,5 +583,7 @@ footer a:hover {
     right: 1rem;
   }
 }
+
+
 
 /*---main styles end ---*/
