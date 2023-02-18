@@ -32,8 +32,9 @@ interface FormValues {
 }
 
 const MerchantName = ({merchantProfile}: SiteProps) => {
+  console.log(process.env.ENV_NAME)
+  console.log(process.env.NEXT_PUBLIC_ENV_NAME)
   //const [siteKey] = useState<string>("1be3a25e-95cb-441d-a951-f140b9e09428");
-  console.log('ENV???', process.env.NEXT_PUBLIC_HCAPTCHA_ID)
   const {t: translate} = useTranslation('common');
   //const [siteKey] = useState<string>("10000000-ffff-ffff-ffff-000000000001"); // TEST
   const [siteKey] = useState<string>(process.env.NEXT_PUBLIC_HCAPTCHA_ID as string);
@@ -212,6 +213,9 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
 export const getServerSideProps: GetServerSideProps<SiteProps> = async (
   context
 ) => {
+  console.log('IN SERVERSIDE PROPS', process.env.ENV_NAME)
+  console.log('IN SERVERSIDE PROPS', process.env.NEXT_PUBLIC_ENV_NAME)
+
   try {
     const merchantName = context.params?.merchantName as string;
 

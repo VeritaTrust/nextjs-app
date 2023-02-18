@@ -5,9 +5,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
-npm run dev
+npm run prod
 # or
-yarn dev
+yarn prod
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -89,3 +89,6 @@ proofOfPurchase: 'NO PROOF',
 };
 }
 }
+
+
+sed -ie 's/sqlite/mysql/g' prisma/schema.prisma && 

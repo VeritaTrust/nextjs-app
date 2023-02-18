@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import Link from 'next/link';
 import Nav from './Nav';
 import SearchBar from './SearchBar';
-import { useState } from 'react';
+import {useState} from 'react';
 
 function Navbar() {
   const router = useRouter();
@@ -10,8 +10,8 @@ function Navbar() {
   const [isActive, setActive] = useState(false);
 
   function onToggleLang(lng: string) {
-    const { pathname, asPath, query } = router;
-    router.push({ pathname, query }, asPath, { locale: lng });
+    const {pathname, asPath, query} = router;
+    router.push({pathname, query}, asPath, {locale: lng});
   }
 
   function handleClick() {
@@ -41,7 +41,7 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <SearchBar />
+            <SearchBar/>
 
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-auto">
               <li className="nav-item dropdown">
@@ -69,7 +69,7 @@ function Navbar() {
                     </a>
                   </li>
                   <li>
-                    <hr className="dropdown-divider" />
+                    <hr className="dropdown-divider"/>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
@@ -121,22 +121,35 @@ function Navbar() {
                   <i className="flaticon flaticon-user"></i>
                 </a>
               </li>
-              <li>
-                <button onClick={() => onToggleLang('tr')}>
-                  CHG LANG TO TR
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onToggleLang('en-US')}>EN</button>
-              </li>
-              <li>
-                <button onClick={() => onToggleLang('fr')}>FR</button>
+
+              <li className="nav-item dropdown">
+                <Link
+                  href='#'
+                  className="nav-link  align-self-center"
+                  aria-current="page"
+                >
+                  <i className="flaticon flaticon-user"></i>
+                </Link>
+                <ul
+                  className="submenu dropdown-menu"
+                  aria-labelledby="navbarDropdown"
+                >
+                  {
+                    router.locales?.map(locale =>
+                      <li key={locale}>
+                        <a className="dropdown-item" onClick={() => onToggleLang(locale)}>
+                          {locale}
+                        </a>
+                      </li>
+                    )
+                  }
+                </ul>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      <Nav isActive={isActive} handleClick={handleClick} />
+      <Nav isActive={isActive} handleClick={handleClick}/>
     </>
   );
 }

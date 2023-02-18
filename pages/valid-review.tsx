@@ -5,7 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 
 const ValidReview: NextPage = () => {
-  const { t: translateCommon } = useTranslation('common');
+  const { t } = useTranslation('common');
   return (
     <>
       <Head>
@@ -17,26 +17,26 @@ const ValidReview: NextPage = () => {
           <div className="container">
             <div className="row d-flex align-items-center">
               <div className="col-11 col-lg-8 pt-3 mx-auto text-center">
-                <p>{translateCommon('product_form_testimonal_msg')}</p>
+                <p>{t('product_form_testimonal_msg')}</p>
               </div>
               <div className="col-11 col-lg-8 py-3 mx-auto position-relative">
                 <ul className="step-reviews nav text-center">
                   <li className="nav-item w-33 step-1 done">
                     <span className="badge rounded-circle">1</span>
                     <p className="mb-0">
-                      {translateCommon('merchant_form_message_opinion')}
+                      {t('merchant_form_message_opinion')}
                     </p>
                   </li>
                   <li className="nav-item w-33 step-2 done">
                     <span className="badge rounded-circle">2</span>
                     <p className="mb-0">
-                      {translateCommon('merchant_form_message_opinion2')}
+                      {t('merchant_form_message_opinion2')}
                     </p>
                   </li>
                   <li className="nav-item w-33 step-3 active">
                     <span className="badge rounded-circle">3</span>
                     <p className="mb-0" aria-current="page">
-                      {translateCommon('validated_message')}
+                      {t('validated_message')}
                     </p>
                   </li>
                 </ul>

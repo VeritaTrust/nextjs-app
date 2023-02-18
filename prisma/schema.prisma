@@ -10,40 +10,46 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// VERITATRUST
-
 model MerchantProfile {
-  id Int @id @default(autoincrement())
-  name String @unique
-  logo String
-  website String @unique
-  email String @unique
+  id      Int              @id @default(autoincrement())
+  name    String           @unique
+  logo    String
+  website String           @unique
+  email   String           @unique
   reviews MerchantReview[]
+
+  @@map("merchants")
 }
 
 model MerchantReview {
-  id Int @id @default(autoincrement())
-  title String
-  content String
-  merchant MerchantProfile @relation(fields: [merchantId], references: [id])
+  id         Int             @id @default(autoincrement())
+  title      String
+  content    String
+  merchant   MerchantProfile @relation(fields: [merchantId], references: [id])
   merchantId Int
+
+  @@map("merchant-reviews")
 }
 
 model Product {
-  id Int @id @default(autoincrement())
-  ean String @unique
-  name String @unique
+  id       Int    @id @default(autoincrement())
+  ean      String @unique
+  name     String @unique
   category String
   imageUrl String
+
+  @@unique([category, imageUrl])
+  @@map("products")
 }
 
 model ProductReview {
-  id Int @id @default(autoincrement())
-  rating Int
+  id             Int      @id @default(autoincrement())
+  rating         Int
   experienceDate DateTime
-  title String
-  content String
-  merchantId Int?
-  imageUrls String
-}
+  title          String
+  content        String
+  merchantId     Int?
+  imageUrls      String
 
+  @@map("product-reviews")
+}

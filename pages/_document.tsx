@@ -1,14 +1,13 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import {Html, Head, Main, NextScript} from 'next/document';
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="icon" href="/favicon.ico" />
-
-        <meta charSet="UTF-8" />
-        <meta name="robots" content="noindex,nofollow" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="icon" href="/fav.png"/>
+        <meta charSet="UTF-8"/>
+        <meta name="robots" content="noindex,nofollow"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -18,9 +17,9 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
           rel="stylesheet"
         />
-        <link rel="stylesheet" type="text/css" href="/font/flaticon.css" />
+        <link rel="stylesheet" type="text/css" href="/font/flaticon.css"/>
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -32,8 +31,8 @@ export default function Document() {
         />
       </Head>
       <body>
-        <Main />
-        <NextScript />
+      <Main/>
+      <NextScript/>
       </body>
     </Html>
   );
