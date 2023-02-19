@@ -19,7 +19,6 @@ const AddProductReview: NextPage<Props> = ({product}: Props) => {
   const router = useRouter();
 
   const [rating, setRating] = useState<number>(DEFAULT_RATING_STAR)
-  const [content, setContent] = useState("")
 
   return (<>
     <section className="py-5 form">
@@ -91,11 +90,11 @@ const AddProductReview: NextPage<Props> = ({product}: Props) => {
                         details.</p>
                       <p id="note_review" >Your review content:
                         <span id="noteReview" style={{marginLeft: '10px'}}
-                              className={`${getNoteByTextLength(content.length).className}`}>{getNoteByTextLength(content.length).title}</span>
+                              className={`${getNoteByTextLength(values.content.length).className}`}>{getNoteByTextLength(values.content.length).title}</span>
                       </p>
                       <Field
                         required={false}
-                        onChange={(e: any) => {setContent(e.target.value); handleChange(e)}}
+                        onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.content}
                         placeholder="State accurate facts and be objective"

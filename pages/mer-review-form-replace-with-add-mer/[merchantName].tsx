@@ -1,13 +1,13 @@
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import React, {forwardRef, useState} from "react";
-import {Form, Formik, FormikConfig, FormikErrors, FormikHelpers, FormikValues} from "formik";
+import {Form, Formik, FormikConfig, FormikHelpers, FormikValues} from "formik";
 import {ToastContainer} from "react-toastify";
 import {GetServerSideProps} from "next";
 import {PrismaClient} from "@prisma/client";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {MerchantProfileMapper} from "@server/mappers";
 import {MerchantProfileDto} from "@server/dto/MerchantProfileDto";
-import {DEFAULT_RATING_STAR, RATING_STAR_TEXTS} from "../../helpers/const";
+import {DEFAULT_RATING_STAR, ERROR_DIV, getNoteByTextLength, RATING_STAR_TEXTS} from "../../helpers/const";
 import Head from "next/head";
 import {AddMerchantReviewDto} from "@server/dto/request/AddMerchantReviewDto";
 import {useRouter} from "next/navigation";
@@ -16,6 +16,29 @@ import Link from "next/link";
 import Image from "next/image";
 import Stars from "../../components/stars";
 import {useTranslation} from "next-i18next";
+import * as yup from "yup";
+
+const advancedSchema = yup.object().shape({
+  title: yup
+    .string()
+    .min(3, "Title must be at least 3 characters long")
+    .required("Required"),
+  content: yup
+    .string()
+    //.oneOf(["designer", "developer", "manager", "other"], "Invalid content? :D Type")
+    .required("Required"),
+  experienceDate: yup
+    .date()
+    .min(new Date('1111-11-10'))
+    .required('Date Required'),
+  captcha: yup
+    .string()
+    .required("Required"),
+  rating: yup
+    .number()
+    .min(1)
+    .required("Please Rate")
+});
 
 interface SiteProps {
   merchantProfile: MerchantProfileDto;
@@ -29,17 +52,15 @@ interface FormValues {
   captcha: string;
   title: string;
   content: string;
+  rating: number;
+  experienceDate: Date;
+  notRequired?: string;
 }
 
 const MerchantName = ({merchantProfile}: SiteProps) => {
-  console.log(process.env.ENV_NAME)
-  console.log(process.env.NEXT_PUBLIC_ENV_NAME)
-  //const [siteKey] = useState<string>("1be3a25e-95cb-441d-a951-f140b9e09428");
   const {t: translate} = useTranslation('common');
-  //const [siteKey] = useState<string>("10000000-ffff-ffff-ffff-000000000001"); // TEST
   const [siteKey] = useState<string>(process.env.NEXT_PUBLIC_HCAPTCHA_ID as string);
   const captchaRef = React.createRef<HCaptcha>();
-  const [rating, setRating] = useState<number>(DEFAULT_RATING_STAR)
   const router = useRouter();
 
   // eslint-disable-next-line react/display-name
@@ -49,15 +70,13 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
         <div style={{marginTop: 30}}>
           <Formik
             {...formikProps}
-            validate={({title}) => {
-              let errors: FormikErrors<FormValues> = {};
-              if (!title) {
-                errors.title = "Enter title please!";
-              }
-              return errors;
-            }}
+            validationSchema={advancedSchema}
           >
             {({
+                errors,
+                values,
+                handleBlur,
+                handleChange,
                 setFieldValue,
                 handleSubmit,
                 isSubmitting,
@@ -112,31 +131,76 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
                           <div className="col-12 col-md-8 col-xl-9">
                             <div className="form__header__note">
                               <p className="lead">Rate your experience</p>
-                              <Stars rating={rating} setRating={(num: number) => setRating(num)}/>
-                              <p>
-                                <span><strong>{`${rating} ${translate('stars')}: `}</strong>{RATING_STAR_TEXTS[rating - 1]}</span>
-                              </p>
+                              <Stars name={'rating'} onChange={handleChange} rating={values.rating} setRating={(num: number) => setFieldValue('rating', num)}/>
+                              <div>
+                                {!values.rating || errors.rating ?
+                                  <>{ERROR_DIV(errors.rating as string)}</>
+                                  :
+                                  <span>
+                                    <strong>{`${values.rating} ${translate('stars')}: `}</strong>{RATING_STAR_TEXTS[values.rating - 1]}
+                                  </span>
+                                }
+                              </div>
                             </div>
+
                           </div>
                         </div>
                       </div>
                       <hr/>
                       <div className="form__content">
                         <p className="lead mt-3 mb-0">Write your title</p>
-                        <input className="form-control" type="text" id="title" name="title"
-                               value="hello" onChange={console.log} required={true}/>
+                        <input
+                          className="form-control"
+                          id="title"
+                          type="title"
+                          name="title"
+                          required={true}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.title}
+                        />
+                        <>{ERROR_DIV(errors.title as string)}</>
+
+                        <p className="lead mt-3 mb-0">NOT REQUIRED LABEL</p>
+                        <input
+                          className="form-control"
+                          id="notRequired"
+                          type="notRequired"
+                          name="notRequired"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.notRequired}
+                        />
+                        <>{ERROR_DIV(errors.notRequired as string)}</>
+
                         <p className="lead mb-0">Write your review</p>
-                        <p id="note_review" className="">Your review content: <span id="noteReview"
-                                                                                    className={'bad'}>Excellent</span>
+                        <p id="note_review">
+                          <span id="noteReview" style={{marginLeft: '10px'}}
+                                className={`Your review content: ${getNoteByTextLength(values.content.length).className}`}>{getNoteByTextLength(values.content.length).title}</span>
                         </p>
-                        <textarea className="form-control" name="content" id="content" rows={10}
-                                  placeholder="Write your review here. Talk about your experience without using offensive language. Leave an honest, useful and constructive testimonial."
+                        <textarea
+                          className="form-control"
+                          name="content"
+                          required={true}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.content}
+                          id="content"
+                          rows={10}
+                          placeholder="Write your review here. Talk about your experience without using offensive language. Leave an honest, useful and constructive testimonial."
                         ></textarea>
+                        <>{ERROR_DIV(errors.content as string)}</>
+                        {JSON.stringify(errors)}
                         <p className="lead mt-3 mb-0">Experience date</p>
                         <input className="form-control" type="date"
                                max={new Date().toISOString().substr(0, 10)} data-date-inline-picker="true"
                                name="experienceDate"
-                               id="date"/>
+                               required={true}
+                               onChange={handleChange}
+                               onBlur={handleBlur}
+                               value={values.experienceDate}
+                        />
+                        <>{ERROR_DIV(errors.experienceDate as string)}</>
                       </div>
                       <div className="form__footer">
                         <HCaptcha
@@ -144,11 +208,11 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
                           sitekey={siteKey}
                           onVerify={token => setFieldValue("captcha", token)}
                         />
-                        <span id="error"></span>
+                        <>{ERROR_DIV(errors.captcha as string)}</>
                         <div className="d-grid gap-2">
                           <button disabled={isSubmitting} type="submit"
-                                  className="btn-block btn btn-primary btn-lg text-uppercase text-right"
-                                  id="btn">Publish
+                                  className="btn-block btn btn-primary btn-lg text-uppercase text-right">
+                            Publish
                           </button>
                         </div>
                       </div>
@@ -174,8 +238,15 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
           <FormComponent
             ref={captchaRef}
             siteKey={siteKey}
-            initialValues={{captcha: "", title: "", content: ""}}
-            onSubmit={(values, {setSubmitting}: FormikHelpers<FormikValues>) => {
+            initialValues={{
+              captcha: "",
+              title: "",
+              content: "",
+              notRequired: '',
+              experienceDate: new Date(),
+              rating: DEFAULT_RATING_STAR
+            } as FormValues}
+            onSubmit={(values, {setSubmitting, resetForm}: FormikHelpers<FormikValues>) => {
               console.log({values});
               console.log(captchaRef.current);
               captchaRef.current && captchaRef.current.resetCaptcha();
@@ -188,7 +259,10 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
                   .then(() => router.push('/valid-review'))
                   // TODO: catch error case what to do?
                   .catch(console.log)
-                  .finally(() => setSubmitting(false))
+                  .finally(() => {
+                    setSubmitting(false);
+                    resetForm()
+                  })
               }, 2000);
             }}
           />
@@ -213,9 +287,6 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
 export const getServerSideProps: GetServerSideProps<SiteProps> = async (
   context
 ) => {
-  console.log('IN SERVERSIDE PROPS', process.env.ENV_NAME)
-  console.log('IN SERVERSIDE PROPS', process.env.NEXT_PUBLIC_ENV_NAME)
-
   try {
     const merchantName = context.params?.merchantName as string;
 

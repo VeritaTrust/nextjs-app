@@ -24,9 +24,6 @@ const AddMerchantReview: NextPage<Props> = ({merchantProfile}: Props) => {
   const {t: translate} = useTranslation('about');
   console.log('TR', translate('about_us_text'));
 
-  const [rating, setRating] = useState<number>(DEFAULT_RATING_STAR)
-  const [content, setContent] = useState("")
-
   return (
     <>
       <Head>
@@ -36,7 +33,7 @@ const AddMerchantReview: NextPage<Props> = ({merchantProfile}: Props) => {
       <main>
         {/* TODO: for validation use YUP */}
         <Formik
-          initialValues={{title: '', content: ''}}
+          initialValues={{title: '', content: '', rating: DEFAULT_RATING_STAR}}
           onSubmit={(values, {setSubmitting}: FormikHelpers<FormValues>) => {
             setTimeout(() => {
               axios
@@ -125,7 +122,7 @@ const AddMerchantReview: NextPage<Props> = ({merchantProfile}: Props) => {
                         <div className="col-12 col-md-8 col-xl-9">
                           <div className="form__header__note">
                             <p className="lead">Rate your experience</p>
-                            <Stars rating={rating} setRating={(num: number) => setRating(num)}/>
+                            <Stars name={'rating'} onChange={handleChange} rating={rating} setRating={(num: number) => setRating(num)}/>
                             <p>
                             <span id="review-value">
                             {rating}
@@ -162,15 +159,12 @@ const AddMerchantReview: NextPage<Props> = ({merchantProfile}: Props) => {
                       <p id="note_review" className="">
                         Your review content:{' '}
                         <span id="noteReview" style={{marginLeft: '10px'}}
-                              className={`${getNoteByTextLength(content.length).className}`}>{getNoteByTextLength(content.length).title}</span>
+                              className={`${getNoteByTextLength(values.content.length).className}`}>{getNoteByTextLength(values.content.length).title}</span>
                       </p>
 
                       <Field
                         required={false}
-                        onChange={(e: any) => {
-                          setContent(e.target.value);
-                          handleChange(e)
-                        }}
+                        onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.content}
                         placeholder="Write your review here. Talk about your experience without using offensive language. Leave an honest, useful and constructive testimonial."
@@ -265,6 +259,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 interface FormValues {
   title: string;
   content: string;
+  rating: number;
 }
 
 export default AddMerchantReview;

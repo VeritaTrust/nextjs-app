@@ -3,6 +3,16 @@
   font-weight: 400;
 }
 
+:root {
+  --bgcolor: #181a1e;
+  --blanc: #202528;
+  --dark: #edeffd;
+  --color-variant-dark: #a3bdcc;
+  --color-light: rgba(0, 0, 0, 0.4);
+  --box-shadow: 0 2rem 3rem var(--color-light);
+  --bs-secondary: #a2c8fe;
+}
+
 .star-default {
   border-radius: 50%;
   width: 3rem;
@@ -263,14 +273,14 @@ section.categories .btn-group.filter {
 }
 
 a.btn,
-button::not(.navbar-toggler, .accordion-button),
+button:not(.navbar-toggler, .accordion-button),
 .home__categorie .category a {
   transition: all 200ms ease-in-out;
   transform: translate(0px, 0px);
   box-shadow: rgba(4, 17, 29, 0.5) 0 5px 15px 0px;
 }
 a.btn:hover,
-button::not(.navbar-toggler, .accordion-button):hover,
+button:not(.navbar-toggler, .accordion-button):hover,
 .home__categorie .category a:hover {
   box-shadow: rgba(4, 17, 29, 0.5) 0 1px 2px 0px;
   transform: translate(0px, 5px);
@@ -569,7 +579,7 @@ footer a:hover {
 }
 .jobs-results tbody tr:hover > * {
   color: #02a68a;
-  --bs-table-accent-bg: $blanc;
+  --bs-table-accent-bg: var(--blanc);
 }
 .jobs-results tbody tr:hover a {
   color: #02a68a;

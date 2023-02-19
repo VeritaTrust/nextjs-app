@@ -27,6 +27,10 @@ const getNoteByTextLength = (textLen: number): NoteTextLen => {
   }
 }
 
-const DEFAULT_RATING_STAR = 5
+const DEFAULT_RATING_STAR = 0
 
-export {getNoteByTextLength, RATING_STAR_TEXTS, DEFAULT_RATING_STAR}
+const ERROR_DIV = (msg: string) => {
+  return <div style={{color: 'red'}}>{msg}</div>;
+}
+
+export {ERROR_DIV, getNoteByTextLength, RATING_STAR_TEXTS, DEFAULT_RATING_STAR}
