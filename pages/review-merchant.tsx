@@ -29,7 +29,7 @@ const ReviewMerchant: NextPage<Props> = ({merchantReviews}) => {
             <div className="container py-2 py-lg-5">
               <div className="row">
                 <div className="col-lg-8">
-
+                  {rating}
                   <WriteReviewDiv></WriteReviewDiv>
                   <Filtering onFilterChange={(rating: number) => setRating(rating)}/>
 

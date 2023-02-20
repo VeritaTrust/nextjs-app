@@ -5,6 +5,7 @@ import Filtering from '../components/Filtering';
 import ProductDiv from '../components/ProductDiv';
 import { OrganicProductReviewDto } from '@server/dto/OrganicProductReviewDto';
 import ProductReview from './product-review';
+import { useState } from 'react';
 
 interface Props {
   productName: string;
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const Resources: NextPage<Props> = ({ productName, organicProductReviews }) => {
+  const [rating, setRating] = useState(0);
+
   return (
     <>
       <Head>
@@ -25,7 +28,8 @@ const Resources: NextPage<Props> = ({ productName, organicProductReviews }) => {
             <div className="container py-2 py-lg-5">
               <div className="row">
                 <div className="col-lg-8">
-                  <Filtering />
+                  {rating}
+                  <Filtering onFilterChange={(rating: number) => setRating(rating)}/>
                   <div className="reviews-list">
                     <div>
                       {organicProductReviews.map((review, index) => (

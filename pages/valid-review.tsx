@@ -1,7 +1,7 @@
 import {NextPage} from 'next';
 import Head from 'next/head';
 import Confetti from 'react-confetti';
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 
 const ValidReview: NextPage = () => {
   const [colors] = useState(['#02a68a', '#789456', '#333333', '#002d6b'])

@@ -3,6 +3,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 First, run the development server:
+if no db found in prisma folder
+do pls. => npm run prisma:dev to migrate sqlite local file db
 
 ```bash
 npm run prod

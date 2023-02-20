@@ -35,7 +35,7 @@ export default function Home() {
       <Script type="text/javascript" src="/js/owl.carousel.js"></Script>
       <Script type="text/javascript" src="/js/custom.js" defer></Script>
       <main>
-        <div className={'row d-flex gap-2'}>
+        <div className={'row d-flex gap-4 p-4'}>
           <Link href={'add-merchant-review?invitation=invkaraoglan-12345-istanbul'}>MERCHANT REVIEW</Link>
           <Link href={'add-product-review/TV-SAMSUNG'}>PRODUCT REVIEW</Link>
           <Link href={'preview-merchant-review/1'}>PREVIEW MERCHANT REVIEW</Link>
@@ -189,8 +189,6 @@ export default function Home() {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    console.log('!!!!AHASHDHSA');
-
     const wr = await new PrismaClient().merchantProfile.findMany({
       include: {
         reviews: true,

@@ -54,15 +54,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
       notFound: true
     }
   }
-
-
-
-  return {
-    props: {
-      name: 'burak',
-      id: merchantReviewId
-    }
-  }
 }
 
 export default PreviewMerchantReview;
