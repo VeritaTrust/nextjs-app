@@ -33,4 +33,13 @@ const ERROR_DIV = (msg: string) => {
   return <div style={{color: 'red'}}>{msg}</div>;
 }
 
-export {ERROR_DIV, getNoteByTextLength, RATING_STAR_TEXTS, DEFAULT_RATING_STAR}
+const omitEmptyOrNullValues = (values: any) => {
+  Object.keys(values).forEach(key => {
+    if (values[key] === '' || values[key] === null || values[key] === undefined || !values[key]) {
+      delete values[key];
+    }
+  });
+}
+
+
+export {ERROR_DIV, getNoteByTextLength, omitEmptyOrNullValues, RATING_STAR_TEXTS, DEFAULT_RATING_STAR}

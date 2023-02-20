@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { MerchantReviewDto } from '@server/dto/MerchantReviewDto';
-import { PrismaClient } from '@prisma/client';
-import { AddMerchantReviewDto } from '@server/dto/request/AddMerchantReviewDto';
+import type {NextApiRequest, NextApiResponse} from 'next';
+import {MerchantReviewDto} from '@server/dto/MerchantReviewDto';
+import {PrismaClient} from '@prisma/client';
+import {AddMerchantReviewDto} from '@server/dto/request/AddMerchantReviewDto';
 import MerchantReviewMapper from '@server/mappers/MerchantReviewMapper';
 
 type Data = {
@@ -23,6 +23,9 @@ export default async function handler(
         content: req.body.content,
         title: req.body.title,
         merchantId: Number(req.query.merchantId),
+        invitationId: Number(req.query.invitationId),
+        rating: Number(req.body.rating),
+        experienceDate: new Date(req.body.experienceDate)
       },
     });
 
@@ -31,6 +34,6 @@ export default async function handler(
     console.log(error);
     return res
       .status(400)
-      .json({ message: 'Unable to connect to the database:' });
+      .json({message: 'Unable to connect to the database:'});
   }
 }

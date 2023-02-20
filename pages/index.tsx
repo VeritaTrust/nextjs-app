@@ -36,8 +36,16 @@ export default function Home() {
       <Script type="text/javascript" src="/js/custom.js" defer></Script>
       <main>
         <div className={'row d-flex gap-2'}>
-          <Link href={'add-merchant-review/KARSOFT'}>MERCHANT REVIEW</Link>
+          <Link href={'add-merchant-review?invitation=invkaraoglan-12345-istanbul'}>MERCHANT REVIEW</Link>
           <Link href={'add-product-review/TV-SAMSUNG'}>PRODUCT REVIEW</Link>
+          <Link href={'preview-merchant-review/1'}>PREVIEW MERCHANT REVIEW</Link>
+          <Link href={'transaction/1'}>TRANSACTION</Link>
+          <Link href={'blog'}>BLOG</Link>
+          <Link href={'product-review'}>PRODUCT REVIEW</Link>
+          <Link href={'resources'}>RESOURCES</Link>
+          <Link href={'review'}>review</Link>
+          <Link href={'review-merchant?website=BRUAKKAROGLAN.com'}>review-merchant</Link>
+          <Link href={'valid-review'}>valid-review</Link>
         </div>
 
         <section className="py-5 home__hero">

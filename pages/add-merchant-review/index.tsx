@@ -1,22 +1,30 @@
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import React, {forwardRef, useState} from "react";
 import {Form, Formik, FormikConfig, FormikHelpers, FormikValues} from "formik";
-import {ToastContainer} from "react-toastify";
+import {ToastContainer, toast} from 'react-toastify';
 import {GetServerSideProps} from "next";
 import {PrismaClient} from "@prisma/client";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {MerchantProfileMapper} from "@server/mappers";
 import {MerchantProfileDto} from "@server/dto/MerchantProfileDto";
-import {DEFAULT_RATING_STAR, ERROR_DIV, getNoteByTextLength, RATING_STAR_TEXTS} from "../../helpers/const";
+import {
+  DEFAULT_RATING_STAR,
+  ERROR_DIV,
+  getNoteByTextLength,
+  omitEmptyOrNullValues,
+  RATING_STAR_TEXTS
+} from "../../helpers/const";
 import Head from "next/head";
 import {AddMerchantReviewDto} from "@server/dto/request/AddMerchantReviewDto";
 import {useRouter} from "next/navigation";
-import axios from "axios";
+import axios, {AxiosError} from "axios";
 import Link from "next/link";
 import Image from "next/image";
 import Stars from "../../components/stars";
 import {useTranslation} from "next-i18next";
 import * as yup from "yup";
+
+const RATE_VALIDATION_TEXT = "Please Rate!"
 
 const advancedSchema = yup.object().shape({
   title: yup
@@ -37,11 +45,12 @@ const advancedSchema = yup.object().shape({
   rating: yup
     .number()
     .min(1)
-    .required("Please Rate")
+    .required(RATE_VALIDATION_TEXT)
 });
 
 interface SiteProps {
   merchantProfile: MerchantProfileDto;
+  invitationId: number;
 }
 
 interface FormComponentProps extends FormikConfig<FormikValues> {
@@ -54,10 +63,9 @@ interface FormValues {
   content: string;
   rating: number;
   experienceDate: Date;
-  notRequired?: string;
 }
 
-const MerchantName = ({merchantProfile}: SiteProps) => {
+const AddMerchantReview = ({merchantProfile, invitationId}: SiteProps) => {
   const {t: translate} = useTranslation('common');
   const [siteKey] = useState<string>(process.env.NEXT_PUBLIC_HCAPTCHA_ID as string);
   const captchaRef = React.createRef<HCaptcha>();
@@ -131,10 +139,11 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
                           <div className="col-12 col-md-8 col-xl-9">
                             <div className="form__header__note">
                               <p className="lead">Rate your experience</p>
-                              <Stars name={'rating'} onChange={handleChange} rating={values.rating} setRating={(num: number) => setFieldValue('rating', num)}/>
+                              <Stars name={'rating'} onChange={handleChange} rating={values.rating}
+                                     setRating={(num: number) => setFieldValue('rating', num)}/>
                               <div>
                                 {!values.rating || errors.rating ?
-                                  <>{ERROR_DIV(errors.rating as string)}</>
+                                  <>{ERROR_DIV(errors.rating as string || RATE_VALIDATION_TEXT)}</>
                                   :
                                   <span>
                                     <strong>{`${values.rating} ${translate('stars')}: `}</strong>{RATING_STAR_TEXTS[values.rating - 1]}
@@ -161,18 +170,6 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
                         />
                         <>{ERROR_DIV(errors.title as string)}</>
 
-                        <p className="lead mt-3 mb-0">NOT REQUIRED LABEL</p>
-                        <input
-                          className="form-control"
-                          id="notRequired"
-                          type="notRequired"
-                          name="notRequired"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.notRequired}
-                        />
-                        <>{ERROR_DIV(errors.notRequired as string)}</>
-
                         <p className="lead mb-0">Write your review</p>
                         <p id="note_review">
                           <span id="noteReview" style={{marginLeft: '10px'}}
@@ -190,7 +187,6 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
                           placeholder="Write your review here. Talk about your experience without using offensive language. Leave an honest, useful and constructive testimonial."
                         ></textarea>
                         <>{ERROR_DIV(errors.content as string)}</>
-                        {JSON.stringify(errors)}
                         <p className="lead mt-3 mb-0">Experience date</p>
                         <input className="form-control" type="date"
                                max={new Date().toISOString().substr(0, 10)} data-date-inline-picker="true"
@@ -208,11 +204,19 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
                           sitekey={siteKey}
                           onVerify={token => setFieldValue("captcha", token)}
                         />
-                        <>{ERROR_DIV(errors.captcha as string)}</>
-                        <div className="d-grid gap-2">
+                        <>{!values.captcha && ERROR_DIV(errors.captcha as string || 'Please Solve Captcha!')}</>
+                        <div className="d-grid gap-2 mt-4">
                           <button disabled={isSubmitting} type="submit"
                                   className="btn-block btn btn-primary btn-lg text-uppercase text-right">
-                            Publish
+                            {isSubmitting ? (
+                              <span
+                                className="spinner-grow spinner-grow-sm"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                            ) : (
+                              `Publish`
+                            )}
                           </button>
                         </div>
                       </div>
@@ -242,23 +246,22 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
               captcha: "",
               title: "",
               content: "",
-              notRequired: '',
               experienceDate: new Date(),
               rating: DEFAULT_RATING_STAR
             } as FormValues}
             onSubmit={(values, {setSubmitting, resetForm}: FormikHelpers<FormikValues>) => {
-              console.log({values});
-              console.log(captchaRef.current);
               captchaRef.current && captchaRef.current.resetCaptcha();
+              omitEmptyOrNullValues(values);
               setTimeout(() => {
                 axios
-                  .post<AddMerchantReviewDto>(
-                    `${process.env.NEXT_PUBLIC_API_URL}/api/merchants/${merchantProfile.id}/reviews`,
+                  .post<AddMerchantReviewDto>(`/api/merchants/${merchantProfile.id}/reviews?invitationId=${invitationId}`,
                     values
                   )
                   .then(() => router.push('/valid-review'))
-                  // TODO: catch error case what to do?
-                  .catch(console.log)
+                  .catch((err: AxiosError) => {
+                    toast.error(err.message);
+                    console.log(err)
+                  })
                   .finally(() => {
                     setSubmitting(false);
                     resetForm()
@@ -269,7 +272,7 @@ const MerchantName = ({merchantProfile}: SiteProps) => {
         )}
       </section>
       <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -288,22 +291,44 @@ export const getServerSideProps: GetServerSideProps<SiteProps> = async (
   context
 ) => {
   try {
-    const merchantName = context.params?.merchantName as string;
+    const invitation = context.query.invitation as string;
 
-    if (!merchantName) {
-      throw Error('NO PROFILE FOUND TO WRITE REVIEW');
+    if (!invitation) {
+      throw Error('NO INVITATION - PROFILE FOUND TO WRITE REVIEW');
     }
 
-    const profile = await new PrismaClient().merchantProfile.findUniqueOrThrow({
+    const result = await new PrismaClient().merchantReviewInvitation.findUniqueOrThrow({
       where: {
-        name: merchantName,
+        invitationUrl: invitation
       },
-    });
+      include: {
+        merchant: true,
+        blockChainTransaction: true,
+        merchantReview: true
+      },
+    })
+
+    const invitationId = result.id;
+
+    if (result.merchantReview?.approvedAt || result.blockChainTransaction) {
+      return {
+        redirect: {
+          source: '/add-merchant-review',
+          destination: `/preview-merchant-review/${result.merchantReview?.id}`,
+          permanent: true,
+        }
+      }
+    }
+
+    if (result.merchantReview?.id) {
+      console.log('REVIEW ADDED COULD BE EDITED FETCH DETAILS AND PUT INTO FORM', JSON.stringify(result.merchantReview))
+    }
 
     return {
       props: {
         ...(await serverSideTranslations(context.locale as string, ['common'])),
-        merchantProfile: MerchantProfileMapper.toDto(profile),
+        merchantProfile: MerchantProfileMapper.toDto(result.merchant),
+        invitationId
       },
     };
   } catch (error) {
@@ -314,4 +339,4 @@ export const getServerSideProps: GetServerSideProps<SiteProps> = async (
   }
 };
 
-export default MerchantName
+export default AddMerchantReview

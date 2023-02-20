@@ -3,7 +3,7 @@ import {ProductMapper} from '@server/mappers';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {ProductDto} from "@server/dto/ProductDto";
 import {PrismaClient} from "@prisma/client";
-import {useState} from "react";
+import React from "react";
 import Stars from "../../components/stars";
 import {DEFAULT_RATING_STAR, getNoteByTextLength, RATING_STAR_TEXTS} from "../../helpers/const";
 import {Field, Formik, FormikHelpers} from "formik";
@@ -18,13 +18,11 @@ interface Props {
 const AddProductReview: NextPage<Props> = ({product}: Props) => {
   const router = useRouter();
 
-  const [rating, setRating] = useState<number>(DEFAULT_RATING_STAR)
-
   return (<>
     <section className="py-5 form">
 
       <Formik
-        initialValues={{title: '', content: '', experienceDate: ''}}
+        initialValues={{title: '', content: '', experienceDate: '', rating: DEFAULT_RATING_STAR}}
         onSubmit={(values, {setSubmitting}: FormikHelpers<FormValues>) => {
           setTimeout(() => {
             axios
@@ -47,6 +45,7 @@ const AddProductReview: NextPage<Props> = ({product}: Props) => {
             handleBlur,
             handleSubmit,
             isSubmitting,
+            setFieldValue
             /* and other goodies */
           }) => (
           <form id="reviewform" onSubmit={handleSubmit}>
@@ -66,9 +65,10 @@ const AddProductReview: NextPage<Props> = ({product}: Props) => {
                         <div className="form__header__note">
                           <p className="lead mb-0">{product.name}</p>
                           <p className="mb-0">How would you rate it?</p>
-                          <Stars rating={rating} setRating={(num: number) => setRating(num)}/>
-                          <p><span id="review-value">{rating}</span>
-                            <span> <strong> stars: </strong>{RATING_STAR_TEXTS[rating - 1]}</span></p>
+                          <Stars name={'rating'} onChange={handleChange} rating={values.rating}
+                                 setRating={(num: number) => setFieldValue('rating', num)}/>
+                          <p><span id="review-value">{values.rating}</span>
+                            <span> <strong> stars: </strong>{RATING_STAR_TEXTS[values.rating - 1]}</span></p>
                         </div>
                       </div>
                     </div>
@@ -88,7 +88,7 @@ const AddProductReview: NextPage<Props> = ({product}: Props) => {
                       <p>Focus on being factual and objective. Don&apos;t use aggressive language and don&apos;t post
                         personal
                         details.</p>
-                      <p id="note_review" >Your review content:
+                      <p id="note_review">Your review content:
                         <span id="noteReview" style={{marginLeft: '10px'}}
                               className={`${getNoteByTextLength(values.content.length).className}`}>{getNoteByTextLength(values.content.length).title}</span>
                       </p>
@@ -267,6 +267,7 @@ interface FormValues {
   title: string;
   content: string;
   experienceDate: string;
+  rating: number;
 }
 
 export default AddProductReview;

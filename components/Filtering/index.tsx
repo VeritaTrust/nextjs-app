@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 
-//function Filtering({ onFilterChange })
-function Filtering() {
+type Props = {
+  onFilterChange: any;
+}
+
+function Filtering({ onFilterChange }: Props) {
   const [selectedOption, setSelectedOption] = useState('1');
 
   // TODO: brk remove any
@@ -35,7 +38,7 @@ function Filtering() {
       .map((e) => e.join('='))
       .join('&')}`;
     window.history.pushState({}, '', newUrl);
-    // TODO: brk ### onFilterChange(currentUrlParams);
+    onFilterChange(currentUrlParams);
   }
 
   return (

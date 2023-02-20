@@ -11,45 +11,103 @@ datasource db {
 }
 
 model MerchantProfile {
-  id      Int              @id @default(autoincrement())
-  name    String           @unique
-  logo    String
-  website String           @unique
-  email   String           @unique
-  reviews MerchantReview[]
+  id         Int                        @id @default(autoincrement())
+  name       String                     @unique
+  logo       String
+  website    String                     @unique
+  email      String                     @unique
+  reviews    MerchantReview[]
+  invitation MerchantReviewInvitation[]
 
   @@map("merchants")
 }
 
 model MerchantReview {
-  id         Int             @id @default(autoincrement())
-  title      String
-  content    String
-  merchant   MerchantProfile @relation(fields: [merchantId], references: [id])
-  merchantId Int
+  id             Int                      @id @default(autoincrement())
+  title          String
+  content        String
+  rating         Int
+  experienceDate DateTime
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
+  approvedAt     DateTime?
+  approvedBy     String?
+  domain         String?
+  invitation     MerchantReviewInvitation @relation(fields: [invitationId], references: [id])
+  merchant       MerchantProfile          @relation(fields: [merchantId], references: [id])
+  merchantId     Int
+  invitationId   Int                      @unique
 
   @@map("merchant-reviews")
 }
 
+model MerchantReviewInvitation {
+  id                    Int                    @id @default(autoincrement())
+  type                  String
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime?              @updatedAt
+  sendAt                DateTime?
+  recipientMail         String
+  invitationUrl         String                 @unique
+  merchant              MerchantProfile        @relation(fields: [merchantId], references: [id])
+  merchantReview        MerchantReview?
+  blockChainTransaction BlockchainTransaction?
+  merchantId            Int
+
+  @@map("merchant-review-invitations")
+}
+
+model ProductReviewInvitation {
+  id            Int            @id @default(autoincrement())
+  type          String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime?      @updatedAt
+  sendAt        DateTime?
+  recipientMail String
+  invitationUrl String         @unique
+  product       Product        @relation(fields: [productId], references: [id])
+  productId     Int
+  productReview ProductReview? @relation(fields: [productReviewId], references: [id])
+
+  blockChainTransaction BlockchainTransaction?
+  productReviewId       Int?
+
+  @@map("product-review-invitations")
+}
+
+model BlockchainTransaction {
+  id                       Int                       @id @default(autoincrement())
+  hash                     String                    @unique
+  status                   String
+  merchantReviewInvitation MerchantReviewInvitation? @relation(fields: [merchantReviewId], references: [id])
+  merchantReviewId         Int?                      @unique
+  productReviewInvitation  ProductReviewInvitation?  @relation(fields: [productReviewId], references: [id])
+  productReviewId          Int?                      @unique
+
+  @@map("blockchain-transactions")
+}
+
 model Product {
-  id       Int    @id @default(autoincrement())
-  ean      String @unique
-  name     String @unique
-  category String
-  imageUrl String
+  id                      Int                       @id @default(autoincrement())
+  ean                     String                    @unique
+  name                    String                    @unique
+  category                String
+  imageUrl                String
+  ProductReviewInvitation ProductReviewInvitation[]
 
   @@unique([category, imageUrl])
   @@map("products")
 }
 
 model ProductReview {
-  id             Int      @id @default(autoincrement())
-  rating         Int
-  experienceDate DateTime
-  title          String
-  content        String
-  merchantId     Int?
-  imageUrls      String
+  id                      Int                       @id @default(autoincrement())
+  rating                  Int
+  experienceDate          DateTime
+  title                   String
+  content                 String
+  merchantId              Int?
+  imageUrls               String
+  ProductReviewInvitation ProductReviewInvitation[]
 
   @@map("product-reviews")
 }

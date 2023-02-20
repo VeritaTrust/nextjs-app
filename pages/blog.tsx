@@ -9,6 +9,7 @@ import UserReward from '../components/UserReward';
 import StateProfile from '../components/StateProfile';
 import { UserRewardDto } from '@server/dto/UserRewardDto';
 import { ProfileStateDto } from '@server/dto/ProfileStateDto';
+import PopoverVerified from "../components/PopoverVerified";
 
 interface Props {
   productName: string;
@@ -93,7 +94,13 @@ const Blog: NextPage<Props> = () => {
                     type={'TYPE??TODO:brk'}
                   />
 
-                  <ReviewDiv data={datareview}></ReviewDiv>
+                  <div className="verified me-lg-3 mb-2">
+
+                    <ReviewDiv data={datareview}></ReviewDiv>
+                  </div>
+
+                  <PopoverVerified hash={'asdasdljhzdgjlskja1231321'} />
+
                 </div>
               </div>
             </div>

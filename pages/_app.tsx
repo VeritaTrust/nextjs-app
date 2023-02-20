@@ -4,6 +4,7 @@ import '../public/styles/style.css';
 import '../public/styles/flaticon_veritatrust.css';
 import '../public/styles/index.css';
 import '../public/styles/owl.carousel.css';
+import 'react-toastify/dist/ReactToastify.css';
 //import 'bootstrap/dist/styles/bootstrap.styles' //TODO: brk check? above enough?
 import type {AppProps} from 'next/app';
 import Navbar from '../components/header';
